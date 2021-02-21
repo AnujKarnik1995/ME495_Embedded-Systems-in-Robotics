@@ -28,22 +28,22 @@ All the following files can be launched in the manner shown: `roslaunch homework
 ## Results:
 1. The map generated from `start_slam.launch` can be seen in the /maps folder under *map.pgm*.
 2. The following links show the actual turtlebot performing the tasks: <br>
-*(rviz_view)*: https://drive.google.com/file/d/1UCzGdjRtyEc1Eh-ZOtlQHQCMAa-4-vVO/view?usp=sharing <br>
-*(live_view)*: https://drive.google.com/file/d/1FOKnzTXWus_wDN7hqp2NJciMrApdsktv/view?usp=sharing
+[rviz_view](https://drive.google.com/file/d/1UCzGdjRtyEc1Eh-ZOtlQHQCMAa-4-vVO/view?usp=sharing) <br>
+[live_view](https://drive.google.com/file/d/1FOKnzTXWus_wDN7hqp2NJciMrApdsktv/view?usp=sharing)
 3. The map generated from `nav_stack.launch` can be seen in the /maps folder under *navstack_real.pgm*.
 4. The results from `nav_stack.launch` can be seen in the video links below:<br>
-*(rviz_view)*: https://drive.google.com/file/d/1wKQMv1kIMJMrD9e3bNNQXE7BeTmPu41a/view?usp=sharing <br>
-*(live_view)*: https://drive.google.com/file/d/1yHoK1RN2l9UNxBtqfUJkIOQbmIGW7l6B/view?usp=sharing
+[rviz_view](https://drive.google.com/file/d/1wKQMv1kIMJMrD9e3bNNQXE7BeTmPu41a/view?usp=sharing) <br>
+[live_view](https://drive.google.com/file/d/1yHoK1RN2l9UNxBtqfUJkIOQbmIGW7l6B/view?usp=sharing)
 5. The results from `slam_stack.launch` can be seen in the *part5_real.pgm* file in the /maps folder.
 6. The links to the video results:
-*(rviz_view)*: https://drive.google.com/file/d/1CmbqP6iefY8nMGRD6vktqGrk7zw1q08P/view?usp=sharing <br>
-*(live_view)*: https://drive.google.com/file/d/1TOyqeVkf1FbJUC43epQ8jy2jSfY5IGeK/view?usp=sharing <br>
+[rviz_view](https://drive.google.com/file/d/1CmbqP6iefY8nMGRD6vktqGrk7zw1q08P/view?usp=sharing) <br>
+[live_view](https://drive.google.com/file/d/1TOyqeVkf1FbJUC43epQ8jy2jSfY5IGeK/view?usp=sharing) <br>
 The videos show the robot replanning the path after an unforeseen obstacle is placed in its path.
 7. The results of the autonomous exploration can be seen in the *expl.pgm* (for the gazebo version) and *expl_actual.pgm* (for the actual turtlebot version) in the /maps folder.
 8. The video results for the same can be found in the links mentioned: <br>
-*gazebo*: https://drive.google.com/file/d/1tZxxd9CWbW-w-YAvvy4SvMhhjrk9CyJY/view?usp=sharing <br>
-*rviz_view*: https://drive.google.com/file/d/1Ox81V7ZQRLk12Y-igi2BCTuVeTy783FZ/view?usp=sharing <br>
-*live_view*: https://drive.google.com/file/d/1itK5CIeD-VkErfx0N_ms4O9OUXwcxeco/view?usp=sharing <br><br>
+[gazebo](https://drive.google.com/file/d/1tZxxd9CWbW-w-YAvvy4SvMhhjrk9CyJY/view?usp=sharing) <br>
+[rviz_view](https://drive.google.com/file/d/1Ox81V7ZQRLk12Y-igi2BCTuVeTy783FZ/view?usp=sharing) <br>
+[live_view](https://drive.google.com/file/d/1itK5CIeD-VkErfx0N_ms4O9OUXwcxeco/view?usp=sharing) <br><br>
 
 ## Node explanation:
 1. The *nav_node* is the main node used to generate waypoints for the /move_base client.

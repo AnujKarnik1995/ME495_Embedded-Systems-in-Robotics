@@ -16,8 +16,7 @@
     1. Follow_rectangle: *follow_rect.png*
     2. Flip: *flip.png*
     3. rviz: *rviz+gazebo.png*
-2. The diff_drive robot following the rectangular path can be seen in this video:
-*https://drive.google.com/file/d/1bF2rFGnxhj6byTZuc4huDfcmCLXAKlb4/view?usp=sharing*
+2. The diff_drive robot following the rectangular path can be seen in this [video](
+https://drive.google.com/file/d/1bF2rFGnxhj6byTZuc4huDfcmCLXAKlb4/view?usp=sharing)
 
-3. The robot executing flips driving can be seen in this video: 
-*https://drive.google.com/file/d/1yAYAOu57hVjTX5CTqJZ5gwwcYr5Rn6SR/view?usp=sharing*
+3. The robot executing flips driving can be seen in this [video](https://drive.google.com/file/d/1yAYAOu57hVjTX5CTqJZ5gwwcYr5Rn6SR/view?usp=sharing)
