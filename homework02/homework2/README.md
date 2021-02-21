@@ -31,8 +31,8 @@ Launch options:
 
 ### Results:
 1. The rqt plot: *RQT_graph_for_Part2.png*
-2. Motion with markers: https://drive.google.com/file/d/1J_h55WY_aEvyZOxJSZMP7cFJ4K6_bkkx/view?usp=sharing
-3. Motion without markers: https://drive.google.com/file/d/1vHU5B_QJc3phmaHYlXTdLX9ALWTkndWI/view?usp=sharing
+2. The motion with markers can be seen [here](https://drive.google.com/file/d/1J_h55WY_aEvyZOxJSZMP7cFJ4K6_bkkx/view?usp=sharing)
+3. The motion without markers can be seen [here](https://drive.google.com/file/d/1vHU5B_QJc3phmaHYlXTdLX9ALWTkndWI/view?usp=sharing)
 
 ### Inverse Kinematics:
 The inverse kinematics of the 2R robot were found from 'Modern Robotics' by Lynch, Park.
