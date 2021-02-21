@@ -1,0 +1,30 @@
+<launch>
+  <!-- start gazebo with an empty plane -->
+  <param name="/use_sim_time" value="true" />
+  <arg name="rect" default="1" />
+  <arg name="rviz" default="0"/>
+  
+  <!-- To load the xacro file -->
+  <arg name="model" default="$(find diff_drive)/urdf/ddrive.xacro.urdf"/>
+  
+  <!-- To load the custom gazebo world with the robot --> 
+  <node name="gazebo" pkg="gazebo_ros" type="gazebo" args="$(find diff_drive)/worlds/ddrive.world" respawn="false" output="screen"/>
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find diff_drive)/urdf/ddrive.xacro.urdf -urdf -y 1 -x 2 -model diff_drive" />
+  
+  <!-- launch the rectangle node -->
+  <group if="$(arg rect)">
+    <node name="follow_rect" pkg="diff_drive" type="follow_rect"/>
+  </group>
+
+  <!-- Load the flip node  -->
+  <group unless="$(arg rect)">
+    <node name="flip" pkg="diff_drive" type="flip" />
+  </group>
+
+  <!--Launch rviz -->
+  <group if="$(arg rviz)">
+  <include file="$(find diff_drive)/launch/ddrive_rviz.launch"/>
+  </group>
+	
+</launch>

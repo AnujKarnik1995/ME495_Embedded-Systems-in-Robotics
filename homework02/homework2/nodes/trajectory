@@ -1,0 +1,139 @@
+#!/usr/bin/env python3
+
+"""
+The Trajectory Node:
+Creates a trajectory in rviz and gives commands to the turtlebot to follow the trajectory using openloop control
+
+Publishers:
+cmd_vel (geometry_msgs/Twist)
+path (nav_msgs/Path)
+
+Services:
+pause (geomemtry_msgs/Twist)  (Not implemented)
+resume (geometry_msgs/Twist)  (Not implemented)
+
+Broadcasts transforms from world from to odom (turtle) frame (Not implemented)
+
+Parameters:
+width: width of the figure of 8
+height: height of the figure of 8
+period: the amount of time it takes to complete the figure of 8
+~pub_freq: the frequency at which to publish the messages
+"""
+
+import rospy
+from geometry_msgs.msg import Point, Quaternion, Pose, PoseStamped, Twist, Vector3
+from nav_msgs.msg import Path
+import homework2.homework2 as h2
+import tf2_ros
+import tf_conversions
+
+class eight:
+    def __init__(self):
+        """
+        The eight class where the parameters are loaded and modules from python script are called
+
+        """
+        self.input = rospy.get_param('eightpath')
+        
+
+
+        
+
+    def eight_path(self, t):
+        """
+        The equation for the figure of 8 parametrized by time.
+        Args:
+            t & parameters defining the dimensions of the '8'
+        Return:
+            A list [xd,yd, xdot, ydot] coordinates of the '8' at the given time 
+        """
+        #calls the traj_gen(T,w,h,time) function from homework2.py
+
+        self.step1 = h2.FigureEight.traj_gen(self.input[0],self.input[1],self.input[2],t)
+
+        return (self.step1)
+
+    def control(self, t):
+        """
+        The control inputs calculation
+        Args:
+            t and parameters returned from the eight path
+        Return:
+            A list [v, omega] of the open loop control signals
+
+        """
+        #calls the control_inputs(T,w,h,xdot,ydot,time) function from homework2.py
+
+        self.step2 = h2.kinematics.control_inputs(self.input[0],self.input[1],self.input[2], self.step1[2],self.step1[3],t)
+
+        return(self.step2)
+
+"""
+    def odometry(msg, turtle1):
+"""
+"""
+        The transforms broadcaster, tf2.
+        Code based on the tutorial on ros the wiki
+"""
+"""
+        br = tf2_ros.TransformBroadcaster()
+        trans = geometry_msgs.msg.TransformStamped()
+
+        trans.header.stamp = rospy.Time.now()
+        trans.header.frame_id = "map"
+        trans.child_frame_id = "turtle1"
+        trans.transform.translation.x = msg.x
+        trans.transform.translation.y = msg.y
+        trans.transform.translation.z = 0.0
+        q = tf_conversions.transformations.quaternion_from_euler(0,0,msg.theta)
+        trans.transform.rotation.x = q[0]
+        trans.transform.rotation.y = q[1]
+        trans.transform.rotation.z = q[2]
+        trans.transform.rotation.w = q[3]
+
+        br.sendTransform(trans)
+"""
+
+def main():
+    """The main function"""
+    #point publisher
+    point_pub = rospy.Publisher("point", Point, queue_size = 10)
+    #path publisher
+    path_pub = rospy.Publisher("path", Path, queue_size = 10)
+    #turtle velocity publisher
+    ttl_pub = rospy.Publisher("turtle1/cmd_vel", Twist, queue_size = 10)
+    
+    rospy.init_node("trajectory")
+    
+    r = rospy.Rate(250.4)
+    t = 0
+    infinity = eight() #eight object
+    path = Path() #path  object
+    path.poses = []
+
+    while not rospy.is_shutdown():
+        four = infinity.eight_path(t)  #array containing [xd, yd xdot, ydot]
+        point_pub.publish(Point(four[0], four[1], 1))
+        two = infinity.control(t) #array containing control inputs [v, omega]
+        
+        vel_command = Twist(linear=Vector3(x=two[0], y=0, z=0), angular=Vector3(x=0, y=0, z=two[1]))
+
+        #rospy.loginfo(f"Error_msg {t} {four[0]} {four[1]} {four[2]} {four[3]}")
+        path.header.stamp = rospy.Time.now()
+        path.header.frame_id = "map"
+        path.poses.append(PoseStamped(header = path.header, pose=Pose(position = Point(four[0],four[1],0), orientation=Quaternion(0,0,0,1))))
+        path_pub.publish(path)
+        ttl_pub.publish(vel_command)
+
+        t += 0.004
+        if t == 20:
+            path.poses = []
+        r.sleep()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass

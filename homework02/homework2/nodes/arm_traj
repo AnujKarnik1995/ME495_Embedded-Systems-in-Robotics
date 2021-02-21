@@ -1,0 +1,88 @@
+#! /usr/bin/env python3
+
+"""
+PUBLISHERS:
+/joint_states (JointState): used to send angles to the robot joints 
+
+"""
+import rospy
+import numpy as np 
+import time
+
+from sensor_msgs.msg import JointState
+from std_msgs.msg import Header
+
+class move(object):
+    """
+    Publishes the joint states for the 2 arm robot to move the end effector with a constant y position.
+    """
+
+    def __init__(self):
+        #INITIALIZATIONS:
+        self.pub = rospy.Publisher("joint_states", JointState, queue_size=10)
+
+        self.L1 = rospy.get_param("L1")
+        self.L2 = rospy.get_param("L2")
+        self.T = rospy.get_param("T")
+        self.h = (2/3)*(self.L1 + self.L2)
+        self.t = 0
+
+    def talker(self):
+        """
+        Calculates and publishes the joint state info
+        
+        OUTPUT:
+        state (JointState)
+
+        """
+
+        #Parameters:
+        rate = rospy.Rate(30)
+        state = JointState()
+        state.header = Header()
+        startTime = time.time()
+
+        #Publish joint states while ROS is not shutdown
+        while not rospy.is_shutdown():
+
+            #linking joint names given in URDF
+            state.name = ['rev1', 'rev2']
+
+            #calculating time t 
+            self.t = time.time() - startTime
+
+            #calculate x and y positions:
+            x = 0.9*np.cos(2*np.pi*self.t/self.T) * np.sqrt((self.L1 + self.L2)**2 - self.h**2)
+            y = (2/3) * (self.L1 + self.L2)
+
+            #Using inverse kinematic equations from Modern Robotics, Chapter 6.
+            th2 = np.arccos((x**2 + y**2 - self.L2**2 - self.L1**2) / (2 * self.L2 * self.L1))
+            th1 = np.arctan2(y, x) - np.arctan2(self.L2 * np.sin(th2), self.L1 + self.L2 * np.cos(th2))
+
+            #set state info to send:
+            state.position = [th1, th2]
+            state.velocity = []
+            state.effort = []
+
+            #updating the timestamp:
+            state.header.stamp = rospy.Time.now()
+
+            #Publishing state info:
+            self.pub.publish(state)
+            rate.sleep()
+
+def main():
+    """
+    the main function
+    """
+    rospy.init_node('arm_traj')
+    go_arm = move()
+    go_arm.talker()
+    rospy.spin()
+
+if __name__ == '__main__':
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass
+

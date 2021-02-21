@@ -1,0 +1,64 @@
+#! /usr/bin/env python3
+
+"""
+Publisher node to flip the diff-drive robot to change its direction.
+
+PUBLILSHERS:
+cmd_vel (geometry_msgs/Twist)
+
+SUBSCRIBERS:
+/gazebo_ros
+(optionally rviz)
+
+"""
+
+import rospy
+from geometry_msgs.msg import Twist, Vector3
+
+class flipper(object):
+    def __init__(self):
+        # declaring the publisher and creating predefined velocity profiles
+        self.pub = rospy.Publisher('/dd/cmd_vel', Twist, queue_size = 10)
+        self.vel0 = Twist(linear = Vector3(x=0,y=0,z=0), angular= Vector3(x=0,y=0,z=0))
+        self.vel1 = Twist(linear = Vector3(x=-1.8,y=0,z=0), angular= Vector3(x=0,y=0,z=0))
+        self.vel11 = Twist(linear = Vector3(x=-0.8,y=0,z=0), angular= Vector3(x=0,y=0,z=0))
+        self.vel2 = Twist(linear = Vector3(x=1.8,y=0,z=0), angular= Vector3(x=0,y=0,z=0))
+        self.vel22 = Twist(linear = Vector3(x=0.8,y=0,z=0), angular= Vector3(x=0,y=0,z=0))
+
+    def fwd(self): #the forward flip profile
+        self.pub.publish(self.vel1)
+        rospy.sleep(1)
+        self.pub.publish(self.vel11)
+        rospy.sleep(1)
+    
+    def rev(self): #the reverse flip profile
+        self.pub.publish(self.vel2)
+        rospy.sleep(1)
+        self.pub.publish(self.vel22)
+        rospy.sleep(1)
+    
+    def halt(self): #the halt profile
+        self.pub.publish(self.vel0)
+        rospy.sleep(1)
+
+def main():
+    topple = flipper() #object of class flipper
+    rospy.init_node('flip')
+    rate = rospy.Rate(1)
+    rospy.sleep(2)  #to compensate for startup time loss
+    while not rospy.is_shutdown():
+        rospy.loginfo("Hello")
+        topple.halt()
+        topple.halt()
+        topple.fwd()
+        topple.halt()
+        topple.rev()
+    
+    rospy.spin()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass
+

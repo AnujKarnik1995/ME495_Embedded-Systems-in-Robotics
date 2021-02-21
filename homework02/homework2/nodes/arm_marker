@@ -1,0 +1,104 @@
+#! /usr/bin/env python3
+
+"""
+PUBLISHERS:
+
+/visulization_marker (Marker): Publishes the information about a marker for rviz to read based on the position of the end effector frame
+
+LISTENERS:
+/tf2 (Transform): Listens to tf2 for the transform data of the end effector relative to the base link
+
+"""
+import rospy
+from visualization_msgs.msg import Marker
+import tf2_ros
+
+class Xmarksthespot(object):
+    """
+    Class to create markers that are published to the end effector location.
+    """
+    def __init__(self):
+        
+        #INITIALIZATIONS
+        self.pub = rospy.Publisher('visualization_marker', Marker, queue_size=10)
+        self.buf = tf2_ros.Buffer()
+        self.listener = tf2_ros.TransformListener(self.buf)
+        self.rate = rospy.Rate(5)
+        self.T = rospy.get_param("T")
+        self.m1 = Marker()
+        self.next = 0
+
+    def move(self):
+        """
+        Main loop which listens to pose information and publishes markers to visualisation_marker
+        """
+        m_type = Marker.ARROW
+
+        #Send marker info while ros is not shutdown
+        while not rospy.is_shutdown():
+            try:
+                #listen to the /tf2 for information
+                #listen for pose info
+                tform = self.buf.lookup_transform("base_link", "end_frame", rospy.Time())
+                rospy.logdebug(tform)
+
+                #to change the color of the marker based on position:
+                if tform.transform.translation.x >= 0:
+                    self.m1.color.r = 1.0
+                    self.m1.color.g = 0.0
+                    self.m1.color.b = 0.0
+                    self.m1.color.a = 1.0
+                
+                else:
+                    self.m1.color.r = 0.0
+                    self.m1.color.g = 0.0
+                    self.m1.color.b = 1.0
+                    self.m1.color.a = 1.0
+
+            #error handling for various errors that came up:
+            except tf2_ros.LookupException:
+                rospy.logdebug("Frame doesn't exist")
+
+            finally:
+                #remaining parameters:
+                self.m1.header.frame_id = "end_frame"
+                self.m1.header.stamp = rospy.Time()
+
+                self.m1.ns = "basic_shapes"
+                self.m1.id = self.next
+                
+                self.m1.type = m_type
+                self.m1.action = Marker.ADD
+
+                self.m1.pose.position.x = 0
+                self.m1.pose.position.y = 0
+                self.m1.pose.position.z = 0
+
+                self.m1.pose.orientation.x = 0
+                self.m1.pose.orientation.y = 0
+                self.m1.pose.orientation.z = 0
+                self.m1.pose.orientation.w = 1
+
+                self.m1.scale.x = 0.1
+                self.m1.scale.y = 0.1
+                self.m1.scale.z = 0.1
+
+                self.m1.lifetime = rospy.Duration(self.T / 5)
+                self.pub.publish(self.m1)
+                self.next = self.next + 1
+                self.rate.sleep()
+
+def main():
+    """
+    The main function
+    """
+    rospy.init_node("arm_marker")
+    mark = Xmarksthespot()
+    mark.move()
+    rospy.spin()
+
+if __name__ == '__main__':
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass

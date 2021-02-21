@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+
+"""
+Node to publish random waypoints for autonomous exploration using slam
+
+PUBLISHERS:
+--
+
+SUBSCRIBERS:
+/odom (Odometry)
+/scan (LaserScan)
+
+ACTION:
+/move_base (action_client)
+
+"""
+
+import rospy
+import actionlib
+from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+from sensor_msgs.msg import LaserScan
+from nav_msgs.msg import Odometry
+import random
+
+import roslib
+import math
+from math import cos, sin
+import tf
+import geometry_msgs.msg
+
+#global variable
+old_goal_list = []
+goal_list = [] 
+goal_x = -3.0
+goal_y = 1.0
+
+def movebase_client():
+    global goal_x, goal_y
+    client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
+    client.wait_for_server()
+
+    goal = MoveBaseGoal()
+    goal.target_pose.header.frame_id = "map"
+    goal.target_pose.header.stamp = rospy.Time.now()
+    goal.target_pose.pose.position.x = goal_x
+    goal.target_pose.pose.position.y = goal_y
+    goal.target_pose.pose.orientation.w = -1.0
+    #print(goal_x, goal_y)
+
+    client.send_goal(goal)
+    wait = client.wait_for_result()
+    if not wait:
+        client.cancel_all_goals()
+        rospy.logerr("Action server not available!")
+        rospy.signal_shutdown("Action server not available!")
+        print("test")
+    else:
+        return client.get_result()
+
+
+index_global = 0
+
+def give_random_number():
+    # Function to select a random number between 0 to 360
+    global index_global
+    angle_index = [i for i in range(360)]
+    a = random.choice(angle_index)
+    index_global = a
+
+def tbot_to_map(data):
+    # Function to calculate the final planned position for the action_server using odom and map data and data from laser scanner
+    global goal_list
+    global goal_x, goal_y
+    give_random_number()
+
+    if goal_list:
+        #location of turtlebot wrt map frame
+        location_x = data.pose.pose.position.x
+        location_y = data.pose.pose.position.y
+        orientation_w = data.pose.pose.orientation.w
+
+        angle_radian = (0.017501922324299812 * goal_list[0])
+        x_coord = (goal_list[1] - 0.30) * cos(angle_radian) #30 cms subtracted as a safeguard to avoid collisions
+        y_coord = (goal_list[1] - 0.30) * sin(angle_radian)
+
+        goal_x = location_x + x_coord
+        goal_y = location_y + y_coord
+
+
+def laser_read(data):
+    # Function to select laser scan data from angle and distance
+
+    global index_global , goal_list
+    # distance between 1 and 3.5 are selected so that too close distances aren't selected. It leads to the turtlebot getting boxed in the corners and failure to escape. 
+    if ((data.ranges[index_global])) < 3.5 and (data.ranges[index_global]) > 1.0:
+        goal_list = [index_global, data.ranges[index_global]]
+        #print(goal_list)
+
+def main():
+    global index_global
+    give_random_number()
+    print(index_global)
+    while not rospy.is_shutdown():
+
+        rospy.init_node('movebase_client_py')
+        odom_nb = rospy.Subscriber('/odom', Odometry, tbot_to_map)
+        distance = rospy.Subscriber('/scan', LaserScan,laser_read)
+        result = movebase_client()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass
+
+
+
+  

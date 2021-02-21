@@ -1,0 +1,10 @@
+#   Robot parameters: [length, breadth, height, body mass, wheel radius, wheel height, wheel mass, castor radius, castor mass]
+dim_y: 0.2 #along y axis
+dim_x: 0.1 #along x axis
+dim_z: 0.05 #along z axis
+b_mass: 0.97  # 0.97 kgs considering HDPE
+wr: 0.08
+wh: 0.02
+wm: 0.2 # 0.2 kgs considering rubber tire
+cr: 0.0275
+cm: 0.05 # random light mass assigned to castor to not affect dynamics

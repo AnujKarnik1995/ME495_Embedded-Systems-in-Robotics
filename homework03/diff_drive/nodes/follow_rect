@@ -1,0 +1,65 @@
+#! /usr/bin/env python3
+"""
+Trial of publishers.. Ways to learn python and ros
+"""
+
+import rospy
+from geometry_msgs.msg import Twist, Vector3
+
+class follow(object):
+    def __init__(self):
+        self.pub = rospy.Publisher('/dd/cmd_vel', Twist, queue_size = 10)
+        self.vel1 = Twist(linear = Vector3(x=-1,y=0,z=0), angular=Vector3(x=0,y=0,z=0))
+        self.vel2 = Twist(linear = Vector3(x=0,y=0,z=0), angular=Vector3(x=0,y=0,z=-0.5))
+        self.vel0 = Twist(linear = Vector3(x=0,y=0,z=0), angular=Vector3(x=0,y=0,z=0))
+        
+
+    def len(self):
+        self.pub.publish(self.vel1)
+        rospy.sleep(3)
+
+    def bdth(self):
+        self.pub.publish(self.vel1)
+        rospy.sleep(2)
+
+    def stop(self):
+        self.pub.publish(self.vel0)
+        rospy.sleep(1)
+
+    def turn(self, blah):
+        self.pub.publish(self.vel2)
+        rospy.sleep(blah)
+
+    def path(self, blah):
+        self.stop()
+        self.stop()
+        self.len()
+        self.turn(blah)
+        self.bdth()
+        self.stop()
+        self.turn(blah)
+        self.len()
+        self.stop()
+        self.turn(blah)
+        self.bdth()
+        self.stop()
+        self.turn(blah)
+        self.stop()
+
+def main():
+    rectangle = follow()
+    rospy.init_node('follow_rect')
+    rate = rospy.Rate(1)
+    while not rospy.is_shutdown():
+        rospy.loginfo("Hello")
+        rectangle.path(3.7)
+
+        #rate.sleep()
+    rospy.spin()
+
+if __name__== '__main__':
+    try:
+        #rospy.wait_for_service("/gazebo/unpause_physics", 3.0)
+        main()
+    except rospy.ROSInterruptException:
+        pass

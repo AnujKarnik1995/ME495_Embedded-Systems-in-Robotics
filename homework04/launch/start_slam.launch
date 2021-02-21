@@ -1,0 +1,40 @@
+<launch>
+
+<!-- Arguments -->
+<!-- Simulation vs Real -->
+  <arg name="simulation" default="true" />
+<!-- Slam toolbox synchronous vs asynchronous -->  
+  <arg name="sync" default="true" />
+
+
+  <!--Turtlebot 3-->
+  <!-- Gazebo house -->
+  <group if="$(arg simulation)">
+    <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_house.launch"/>
+    <!--<node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find turtlebot3_slam)/rviz/turtlebot3_hector.rviz" /> -->
+  </group>
+  <!-- Real Turtlebot-->
+  <group unless="$(arg simulation)">
+    <include file="$(find turtlebot3_bringup)/launch/turtlebot3_remote.launch"/>
+    <!--<node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find turtlebot3_slam)/rviz/turtlebot3_frontier_exploration.rviz" />-->
+  </group>
+  
+  <!-- teleop node-->
+  <include file="$(find turtlebot3_teleop)/launch/turtlebot3_teleop_key.launch"/>
+    
+  <!-- Synchronous or Asynchronous mode -->
+  <group if="$(arg sync)">
+    <node pkg="slam_toolbox" type="sync_slam_toolbox_node" name="slam_toolbox" output="screen">
+      <rosparam command="load" file="$(find slam_toolbox)/config/mapper_params_online_sync.yaml" />
+    </node>
+  </group>
+
+  <group unless="$(arg sync)">
+    <node pkg="slam_toolbox" type="async_slam_toolbox_node" name="slam_toolbox" output="screen">
+      <rosparam command="load" file="$(find slam_toolbox)/config/mapper_params_online_async.yaml" />
+    </node>
+  </group>
+
+<node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find homework4)/rviz/start_slam.rviz"/>
+
+</launch>

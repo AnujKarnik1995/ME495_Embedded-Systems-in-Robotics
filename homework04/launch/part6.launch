@@ -1,0 +1,20 @@
+<launch>
+    <!--Arguments-->
+    <arg name="simulation" default="true"/>
+    
+    <!--Launch simulation-->
+    <group if="$(arg simulation)">
+        <include file="$(find homework4)/launch/slam_stack.launch">
+            <arg name="simulation" value="$(arg simulation)" />
+        </include>
+    </group>
+    <!--Launch real turtlebot-->
+    <group unless="$(arg simulation)">
+        <include file="$(find homework4)/launch/slam_stack.launch">
+            <arg name="simulation" value="$(arg simulation)" />
+        </include>
+    </group>
+
+    <node pkg="homework4" type="nav_node" name="nav_node"/>
+
+</launch>

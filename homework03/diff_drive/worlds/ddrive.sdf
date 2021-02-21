@@ -1,0 +1,5797 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='asphalt_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-2.73486 0.598118 0 0 -0 0</pose>
+    </model>
+    <model name='cardboard_box'>
+      <pose>-7.5154 3.30586 0.15 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://cardboard_box/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_0'>
+      <pose>-5.99834 5.1681 0.15 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://cardboard_box/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_1'>
+      <pose>1.98528 2.94411 0.15 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://cardboard_box/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='cardboard_box_2'>
+      <pose>-0.334783 5.12349 0.15 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0416667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0566667</iyy>
+            <iyz>0</iyz>
+            <izz>0.0683333</izz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.4 0.3</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.1</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.15 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://cardboard_box/meshes/cardboard_box.dae</uri>
+              <scale>1.25932 1.00745 0.755591</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='jersey_barrier'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://jersey_barrier/meshes/jersey_barrier.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='upright'>
+          <pose>0 0 0.5715 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.3063 1.143</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base'>
+          <pose>0 0 0.032258 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.8107 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base2'>
+          <pose>0 0 0.1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.65 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base3'>
+          <pose>0 0 0.2 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='left-angle'>
+          <pose>0 -0.224 0.2401 0.9 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='right-angle'>
+          <pose>0 0.224 0.2401 -0.9 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-5.79755 -6.2809 0 0 -0 0</pose>
+    </model>
+    <model name='jersey_barrier_0'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://jersey_barrier/meshes/jersey_barrier.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='upright'>
+          <pose>0 0 0.5715 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.3063 1.143</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base'>
+          <pose>0 0 0.032258 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.8107 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base2'>
+          <pose>0 0 0.1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.65 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base3'>
+          <pose>0 0 0.2 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='left-angle'>
+          <pose>0 -0.224 0.2401 0.9 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='right-angle'>
+          <pose>0 0.224 0.2401 -0.9 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>2.06372 -6.40784 0 0 -0 0</pose>
+    </model>
+    <model name='jersey_barrier_1'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://jersey_barrier/meshes/jersey_barrier.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='upright'>
+          <pose>0 0 0.5715 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.3063 1.143</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base'>
+          <pose>0 0 0.032258 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.8107 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base2'>
+          <pose>0 0 0.1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.65 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base3'>
+          <pose>0 0 0.2 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='left-angle'>
+          <pose>0 -0.224 0.2401 0.9 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='right-angle'>
+          <pose>0 0.224 0.2401 -0.9 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-7.62274 -2.74124 0 0 -0 0</pose>
+    </model>
+    <model name='jersey_barrier_2'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://jersey_barrier/meshes/jersey_barrier.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='upright'>
+          <pose>0 0 0.5715 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.3063 1.143</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base'>
+          <pose>0 0 0.032258 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.8107 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base2'>
+          <pose>0 0 0.1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.65 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base3'>
+          <pose>0 0 0.2 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='left-angle'>
+          <pose>0 -0.224 0.2401 0.9 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='right-angle'>
+          <pose>0 0.224 0.2401 -0.9 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>4.82904 -4.03167 0 0 -0 0</pose>
+    </model>
+    <model name='jersey_barrier_3'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://jersey_barrier/meshes/jersey_barrier.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='upright'>
+          <pose>0 0 0.5715 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.3063 1.143</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base'>
+          <pose>0 0 0.032258 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.8107 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base2'>
+          <pose>0 0 0.1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.65 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base3'>
+          <pose>0 0 0.2 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='left-angle'>
+          <pose>0 -0.224 0.2401 0.9 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='right-angle'>
+          <pose>0 0.224 0.2401 -0.9 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>4.04808 0.980419 0 0 -0 0</pose>
+    </model>
+    <model name='jersey_barrier_4'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://jersey_barrier/meshes/jersey_barrier.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='upright'>
+          <pose>0 0 0.5715 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.3063 1.143</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base'>
+          <pose>0 0 0.032258 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.8107 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base2'>
+          <pose>0 0 0.1 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.65 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base3'>
+          <pose>0 0 0.2 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='left-angle'>
+          <pose>0 -0.224 0.2401 0.9 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='right-angle'>
+          <pose>0 0.224 0.2401 -0.9 0 0</pose>
+          <geometry>
+            <box>
+              <size>4.06542 0.5 0.064516</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-8.73018 2.10425 0 0 -0 0</pose>
+    </model>
+    <model name='r2'>
+      <link name='/r2/robot_world'>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0.625017 0 -0 0</pose>
+          <mass>56.01</mass>
+          <inertia>
+            <ixx>14.6261</ixx>
+            <ixy>-3.58342e-06</ixy>
+            <ixz>-5.7072e-09</ixz>
+            <iyy>14.6252</iyy>
+            <iyz>-1.43337e-06</iyz>
+            <izz>12.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/robot_world_collision_/r2/baseplate'>
+          <pose>0 0 0 1.57 0 3.14</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Stanchion_Baseplate.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='/r2/robot_world_collision_/r2/stanchion'>
+          <pose>0 0 0.4 0 -0 -1.57319</pose>
+          <geometry>
+            <cylinder>
+              <length>0.5</length>
+              <radius>0.075</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/robot_world_visual_/r2/baseplate'>
+          <pose>0 0 0 1.57 0 3.14</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Stanchion_Baseplate.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='/r2/robot_world_visual_/r2/stanchion'>
+          <pose>0 0 0.7 0 -0 -1.57319</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Stanchion.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='/r2/waist_center'>
+        <pose>0 0 0.72 -3.14159 0.001593 -1.57478</pose>
+        <inertial>
+          <pose>2.3e-05 0 -0.00027 0 -0 0</pose>
+          <mass>20.13</mass>
+          <inertia>
+            <ixx>2.00426</ixx>
+            <ixy>0</ixy>
+            <ixz>-0.000355745</ixz>
+            <iyy>2.00716</iyy>
+            <iyz>0</iyz>
+            <izz>2.0042</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/waist_center_collision'>
+          <pose>0.02 0.05 -0.5625 -1.57 -0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Body.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='/r2/waist_center_collision_/r2/backpack'>
+          <pose>0 0 -0.54 0 -0 0.25</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Backpack.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='/r2/waist_center_collision_/r2/body_cover'>
+          <pose>0.02 0.05 -0.5625 -1.57 -0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Body_Cover.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/waist_center_visual'>
+          <pose>0.02 0.05 -0.5625 -1.57 -0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Body.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='/r2/waist_center_visual_/r2/backpack'>
+          <pose>0 0 -0.54 0 -0 0.25</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Backpack.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='/r2/waist_center_visual_/r2/body_cover'>
+          <pose>0.02 0.05 -0.5625 -1.57 -0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Body_Cover.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/waist/joint0' type='revolute'>
+        <child>/r2/waist_center</child>
+        <parent>/r2/robot_world</parent>
+        <axis>
+          <xyz expressed_in='__model__'>6e-06 0.001593 -0.999999</xyz>
+          <limit>
+            <lower>-3.14</lower>
+            <upper>3.14</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>10</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/left_shoulder_roll'>
+        <pose>0.000257 0.064475 1.26435 1.5756 -0.001539 1.30542</pose>
+        <inertial>
+          <pose>-0.008992 -0.001316 0.10287 0 -0 0</pose>
+          <mass>6.16886</mass>
+          <inertia>
+            <ixx>0.0198585</ixx>
+            <ixy>-0.0060196</ixy>
+            <ixz>-0.000395063</ixz>
+            <iyy>0.0671901</iyy>
+            <iyz>0.00012683</iyz>
+            <izz>0.063415</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_shoulder_roll_collision'>
+          <pose>0 0 0.08 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Shoulder_Upper.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_shoulder_roll_visual'>
+          <pose>0 0 0.08 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Shoulder_Upper.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/joint0' type='revolute'>
+        <child>/r2/left_shoulder_roll</child>
+        <parent>/r2/waist_center</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.964985 -0.262261 -0.004808</xyz>
+          <limit>
+            <lower>-1.57</lower>
+            <upper>1.57</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>10</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/left_shoulder_pitch'>
+        <pose>0.305782 -0.01856 1.26283 1.88114 -1.56575 -0.575018</pose>
+        <inertial>
+          <pose>0.037084 -0.000284 0.007798 0 -0 0</pose>
+          <mass>4.42706</mass>
+          <inertia>
+            <ixx>0.0270106</ixx>
+            <ixy>0.00151295</ixy>
+            <ixz>-5.23825e-05</ixz>
+            <iyy>0.0113837</iyy>
+            <iyz>2.17139e-05</iyz>
+            <izz>0.0251963</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_shoulder_pitch_collision'>
+          <pose>0 0 0 0 0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Shoulder_Lower.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_shoulder_pitch_visual'>
+          <pose>0 0 0 0 0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Shoulder_Lower.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/joint1' type='revolute'>
+        <child>/r2/left_shoulder_pitch</child>
+        <parent>/r2/left_shoulder_roll</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.261598 -0.965176 -0.001542</xyz>
+          <limit>
+            <lower>-1.66</lower>
+            <upper>0.175</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>10</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/left_upper_arm'>
+        <pose>0.305782 -0.01856 1.26283 -2.83205 -1.56575 -0.575018</pose>
+        <inertial>
+          <pose>-0.007417 -0.041402 0.1016 0 -0 0</pose>
+          <mass>4.85344</mass>
+          <inertia>
+            <ixx>0.0160074</ixx>
+            <ixy>-0.00339462</ixy>
+            <ixz>0.00658439</ixz>
+            <iyy>0.0462371</iyy>
+            <iyz>0.00137541</iyz>
+            <izz>0.0421401</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_upper_arm_collision'>
+          <pose>0 0 0.1016 0 -0 3.14</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Upper_Arm.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_upper_arm_visual'>
+          <pose>0 0 0.1016 0 -0 3.14</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Upper_Arm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/joint2' type='revolute'>
+        <child>/r2/left_upper_arm</child>
+        <parent>/r2/left_shoulder_pitch</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.964959 -0.262357 -0.004808</xyz>
+          <limit>
+            <lower>-4.89</lower>
+            <upper>-0.79</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>10</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/left_elbow'>
+        <pose>0.649499 -0.111925 1.20674 1.87634 -1.56575 -0.575018</pose>
+        <inertial>
+          <pose>0.026162 0.033782 0.015443 0 -0 0</pose>
+          <mass>2.97103</mass>
+          <inertia>
+            <ixx>0.0120275</ixx>
+            <ixy>0.00164171</ixy>
+            <ixz>-0.00118812</ixz>
+            <iyy>0.00883772</iyy>
+            <iyz>0.00316051</iyz>
+            <izz>0.010535</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_elbow_collision'>
+          <pose>0 0 0 0 0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Elbow.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_elbow_visual'>
+          <pose>0 0 0 0 0 -1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Elbow.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/joint3' type='revolute'>
+        <child>/r2/left_elbow</child>
+        <parent>/r2/left_upper_arm</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.266228 -0.963909 -0.001518</xyz>
+          <limit>
+            <lower>-2.79</lower>
+            <upper>-0.087</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/left_lower_arm'>
+        <pose>0.649728 -0.112073 1.26077 -2.83305 -1.56575 -0.575018</pose>
+        <inertial>
+          <pose>0.000356 -0.001227 0.17653 0 -0 0</pose>
+          <mass>6.93996</mass>
+          <inertia>
+            <ixx>0.012525</ixx>
+            <ixy>-0.000244647</ixy>
+            <ixz>0.000520899</ixz>
+            <iyy>0.0395064</iyy>
+            <iyz>-0.000169146</iyz>
+            <izz>0.0403843</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_lower_arm_collision'>
+          <pose>0 0 0.1 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Forearm.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_lower_arm_visual'>
+          <pose>0 0 0.1 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Forearm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/joint4' type='revolute'>
+        <child>/r2/left_lower_arm</child>
+        <parent>/r2/left_elbow</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.964696 -0.263322 -0.00481</xyz>
+          <limit>
+            <lower>-1.3</lower>
+            <upper>4.45</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/left_wrist_pitch'>
+        <pose>0.994171 -0.206092 1.25906 1.85494 -1.56575 -0.575018</pose>
+        <inertial>
+          <pose>-0.004064 0 -0.000922 0 -0 0</pose>
+          <mass>0.116573</mass>
+          <inertia>
+            <ixx>5.765e-05</ixx>
+            <ixy>4.36e-11</ixy>
+            <ixz>1.75876e-06</ixz>
+            <iyy>1.69438e-05</iyy>
+            <iyz>5.4431e-08</iyz>
+            <izz>4.41886e-05</izz>
+          </inertia>
+        </inertial>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/joint5' type='revolute'>
+        <child>/r2/left_wrist_pitch</child>
+        <parent>/r2/left_lower_arm</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.286793 -0.957991 -0.001415</xyz>
+          <limit>
+            <lower>-1.22</lower>
+            <upper>1.22</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/left_wrist_yaw'>
+        <pose>0.999988 -0.207833 1.25901 -3.06047 0.006749 -0.290868</pose>
+        <inertial>
+          <pose>0.033205 -0.025812 0.033286 0 -0 0</pose>
+          <mass>2.37882</mass>
+          <inertia>
+            <ixx>0.0112391</ixx>
+            <ixy>0.000520047</ixy>
+            <ixz>0.00298821</ixz>
+            <iyy>0.0135826</iyy>
+            <iyz>0.000437366</iyz>
+            <izz>0.0112115</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_wrist_yaw_collision_/r2/left_palm'>
+          <pose>0 0 0 3.14 -0 1.556</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Palm.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_wrist_yaw_visual_/r2/left_palm'>
+          <pose>0 0 0 3.14 -0 1.556</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Palm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/joint6' type='revolute'>
+        <child>/r2/left_wrist_yaw</child>
+        <parent>/r2/left_wrist_pitch</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.016794 0.079555 -0.996689</xyz>
+          <limit>
+            <lower>-0.785</lower>
+            <upper>0.785</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/left_index_yaw'>
+        <pose>1.08724 -0.263526 1.27225 -3.0619 0.016574 -0.412654</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/index/joint0' type='revolute'>
+        <child>/r2/left_index_yaw</child>
+        <parent>/r2/left_wrist_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.016794 0.079555 -0.996689</xyz>
+          <limit>
+            <lower>-0.3491</lower>
+            <upper>0.3491</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_index_proximal'>
+        <pose>1.09608 -0.267396 1.27209 -1.4911 0.016574 -0.412654</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_index_proximal_collision'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_index_proximal_visual'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/index/joint1' type='revolute'>
+        <child>/r2/left_index_proximal</child>
+        <parent>/r2/left_index_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.400978 0.912623 0.079601</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_index_medial'>
+        <pose>1.13679 -0.28522 1.27135 -1.4911 0.016574 -0.412654</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_index_medial_collision'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_index_medial_visual'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/index/joint2' type='revolute'>
+        <child>/r2/left_index_medial</child>
+        <parent>/r2/left_index_proximal</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.400978 0.912623 0.079601</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_index_distal'>
+        <pose>1.16471 -0.297442 1.27085 -1.4911 0.016574 -0.412654</pose>
+        <inertial>
+          <pose>0.012319 0 0 0 -0 0</pose>
+          <mass>0.002</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0020003</iyy>
+            <iyz>0</iyz>
+            <izz>0.0020003</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_index_distal_collision'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_index_distal_visual'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/index/joint3' type='revolute'>
+        <child>/r2/left_index_distal</child>
+        <parent>/r2/left_index_medial</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.400978 0.912623 0.079601</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_middle_yaw'>
+        <pose>1.10098 -0.242075 1.27419 -3.06047 0.006749 -0.290868</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/middle/joint0' type='revolute'>
+        <child>/r2/left_middle_yaw</child>
+        <parent>/r2/left_wrist_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.016794 0.079555 -0.996689</xyz>
+          <limit>
+            <lower>-0.3491</lower>
+            <upper>0.3491</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_middle_proximal'>
+        <pose>1.11023 -0.244843 1.27413 -1.48968 0.006749 -0.290868</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_middle_proximal_collision'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_middle_proximal_visual'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/middle/joint1' type='revolute'>
+        <child>/r2/left_middle_proximal</child>
+        <parent>/r2/left_middle_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.286365 0.954688 0.081028</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_middle_medial'>
+        <pose>1.15281 -0.25759 1.27383 -1.48968 0.006749 -0.290868</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_middle_medial_collision'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_middle_medial_visual'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/middle/joint2' type='revolute'>
+        <child>/r2/left_middle_medial</child>
+        <parent>/r2/left_middle_proximal</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.286365 0.954688 0.081028</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_middle_distal'>
+        <pose>1.18201 -0.266331 1.27362 -1.48968 0.006749 -0.290868</pose>
+        <inertial>
+          <pose>0.012319 0 0 0 -0 0</pose>
+          <mass>0.002</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0020003</iyy>
+            <iyz>0</iyz>
+            <izz>0.0020003</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_middle_distal_collision'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_middle_distal_visual'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/middle/joint3' type='revolute'>
+        <child>/r2/left_middle_distal</child>
+        <parent>/r2/left_middle_medial</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.286365 0.954688 0.081028</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_little_proximal'>
+        <pose>1.10211 -0.196907 1.26772 -1.45457 0.079556 -0.109831</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_little_proximal_collision'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_little_proximal_visual'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/little/joint0' type='revolute'>
+        <child>/r2/left_little_proximal</child>
+        <parent>/r2/left_wrist_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.118031 0.986259 0.115594</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_little_medial'>
+        <pose>1.14615 -0.201764 1.26418 -1.45457 0.079556 -0.109831</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_little_medial_collision'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_little_medial_visual'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/little/joint1' type='revolute'>
+        <child>/r2/left_little_medial</child>
+        <parent>/r2/left_little_proximal</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.118031 0.986259 0.115594</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_little_distal'>
+        <pose>1.17635 -0.205094 1.26176 -1.45457 0.079556 -0.109831</pose>
+        <inertial>
+          <pose>0.012319 0 0 0 -0 0</pose>
+          <mass>0.002</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0020003</iyy>
+            <iyz>0</iyz>
+            <izz>0.0020003</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_little_distal_collision'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_little_distal_visual'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/little/joint2' type='revolute'>
+        <child>/r2/left_little_distal</child>
+        <parent>/r2/left_little_medial</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.118031 0.986259 0.115594</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_ring_proximal'>
+        <pose>1.10934 -0.221045 1.27216 -1.48946 -0.003176 -0.169099</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_ring_proximal_collision'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_ring_proximal_visual'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/ring/joint0' type='revolute'>
+        <child>/r2/left_ring_proximal</child>
+        <parent>/r2/left_wrist_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.167483 0.982521 0.081247</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_ring_medial'>
+        <pose>1.15316 -0.228525 1.2723 -1.48946 -0.003176 -0.169099</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_ring_medial_collision'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_ring_medial_visual'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/ring/joint1' type='revolute'>
+        <child>/r2/left_ring_medial</child>
+        <parent>/r2/left_ring_proximal</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.167483 0.982521 0.081247</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_ring_distal'>
+        <pose>1.1832 -0.233655 1.2724 -1.48946 -0.003176 -0.169099</pose>
+        <inertial>
+          <pose>0.012319 0 0 0 -0 0</pose>
+          <mass>0.002</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0020003</iyy>
+            <iyz>0</iyz>
+            <izz>0.0020003</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_ring_distal_collision'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_ring_distal_visual'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/ring/joint2' type='revolute'>
+        <child>/r2/left_ring_distal</child>
+        <parent>/r2/left_ring_medial</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.167483 0.982521 0.081247</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_thumb_base'>
+        <pose>1.023 -0.245896 1.24999 1.5853 0.0801 -1.59956</pose>
+        <inertial>
+          <pose>0.000234 0 0 0 -0 0</pose>
+          <mass>0.051</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00200014</iyy>
+            <iyz>-5.16988e-26</iyz>
+            <izz>0.00200014</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_thumb_base_collision_/r2/left_thumb_proximal'>
+          <pose>0.001938 0 0 -3.1408 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Thumb_Carp.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_thumb_base_visual_/r2/left_thumb_proximal'>
+          <pose>0.001938 0 0 -3.1408 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Thumb_Carp.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/thumb/joint0' type='revolute'>
+        <child>/r2/left_thumb_base</child>
+        <parent>/r2/left_wrist_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.999448 0.029915 -0.014452</xyz>
+          <limit>
+            <lower>-1.2217</lower>
+            <upper>0</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_thumb_medial_prime'>
+        <pose>1.02266 -0.257791 1.24904 0.0145 0.0801 -1.59956</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_thumb_medial_prime_collision'>
+          <pose>0 0 0 -1.57 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Thumb_MtCar.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_thumb_medial_prime_visual'>
+          <pose>-0 0 0 -1.57 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Thumb_MtCar.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/thumb/joint1' type='revolute'>
+        <child>/r2/left_thumb_medial_prime</child>
+        <parent>/r2/left_thumb_base</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.016794 -0.079555 0.996689</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.3963</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_thumb_medial'>
+        <pose>1.01983 -0.288559 1.24908 -0.683633 0.080099 -1.59956</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_thumb_medial_collision'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Thumb_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_thumb_medial_visual'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Thumb_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/thumb/joint2' type='revolute'>
+        <child>/r2/left_thumb_medial</child>
+        <parent>/r2/left_thumb_medial_prime</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.629568 -0.080172 0.772798</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.2217</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/left_thumb_distal'>
+        <pose>1.0187 -0.327786 1.24593 -0.683633 0.080099 -1.59956</pose>
+        <inertial>
+          <pose>0.01651 0 0 0 -0 0</pose>
+          <mass>0.002</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00200055</iyy>
+            <iyz>0</iyz>
+            <izz>0.00200055</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/left_thumb_distal_collision'>
+          <pose>0 0 0 -0.001593 0.001593 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Thumb_Dist.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/left_thumb_distal_visual'>
+          <pose>0 0 0 -0.001593 0.001593 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Thumb_Dist.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/left_arm/hand/thumb/joint3' type='revolute'>
+        <child>/r2/left_thumb_distal</child>
+        <parent>/r2/left_thumb_medial</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.629568 -0.080172 0.772798</xyz>
+          <limit>
+            <lower>-0.5236</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_shoulder_roll'>
+        <pose>0.000257 0.064475 1.26435 1.5824 0.001538 -1.31321</pose>
+        <inertial>
+          <pose>0.008992 -0.001316 0.10287 0 -0 0</pose>
+          <mass>6.16886</mass>
+          <inertia>
+            <ixx>0.0198585</ixx>
+            <ixy>0.0060196</ixy>
+            <ixz>0.000395063</ixz>
+            <iyy>0.0671901</iyy>
+            <iyz>0.00012683</iyz>
+            <izz>0.063415</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_shoulder_roll_collision'>
+          <pose>0 0 0.0254 0 -0 2.35</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Shoulder_Upper.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_shoulder_roll_visual'>
+          <pose>0 0 0.0254 0 -0 2.25</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Shoulder_Upper.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/joint0' type='revolute'>
+        <child>/r2/right_shoulder_roll</child>
+        <parent>/r2/waist_center</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.966946 -0.254715 -0.011608</xyz>
+          <limit>
+            <lower>-1.57</lower>
+            <upper>1.57</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>10</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/right_shoulder_pitch'>
+        <pose>-0.310064 -0.017271 1.26062 -1.44615 1.55909 0.389321</pose>
+        <inertial>
+          <pose>0.007798 0.037084 0.000284 0 -0 0</pose>
+          <mass>4.42706</mass>
+          <inertia>
+            <ixx>0.0113837</ixx>
+            <ixy>-2.17139e-05</ixy>
+            <ixz>-0.00151295</ixz>
+            <iyy>0.0251963</iyy>
+            <iyz>-5.23825e-05</iyz>
+            <izz>0.0270106</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_shoulder_pitch_collision'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Shoulder_Lower.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_shoulder_pitch_visual'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Shoulder_Lower.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/joint1' type='revolute'>
+        <child>/r2/right_shoulder_pitch</child>
+        <parent>/r2/right_shoulder_roll</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.261605 0.965174 0.001456</xyz>
+          <limit>
+            <lower>-1.66</lower>
+            <upper>0.175</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>10</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/right_upper_arm'>
+        <pose>-0.310064 -0.017271 1.26062 -3.01405 1.55909 0.389321</pose>
+        <inertial>
+          <pose>0.041402 -0.007417 0.1016 0 -0 0</pose>
+          <mass>4.85344</mass>
+          <inertia>
+            <ixx>0.0421401</ixx>
+            <ixy>-0.00137541</ixy>
+            <ixz>-0.00658439</ixz>
+            <iyy>0.0462371</iyy>
+            <iyz>-0.00339462</iyz>
+            <izz>0.0160074</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_upper_arm_collision'>
+          <pose>0 0 0.1016 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Upper_Arm.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_upper_arm_visual'>
+          <pose>0 0 0.1016 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Upper_Arm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/joint2' type='revolute'>
+        <child>/r2/right_upper_arm</child>
+        <parent>/r2/right_shoulder_pitch</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.965868 -0.258774 -0.011614</xyz>
+          <limit>
+            <lower>0.785</lower>
+            <upper>4.89</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>10</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/right_elbow'>
+        <pose>-0.652578 -0.108954 1.2029 -1.44565 1.55909 0.389321</pose>
+        <inertial>
+          <pose>-0.026162 0.033782 0.015443 0 -0 0</pose>
+          <mass>2.97103</mass>
+          <inertia>
+            <ixx>0.0120275</ixx>
+            <ixy>-0.00118812</ixy>
+            <ixz>0.00164171</ixz>
+            <iyy>0.00883772</iyy>
+            <iyz>-0.00316051</iyz>
+            <izz>0.010535</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_elbow_collision'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Elbow.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_elbow_visual'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Elbow.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/joint3' type='revolute'>
+        <child>/r2/right_elbow</child>
+        <parent>/r2/right_upper_arm</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.261122 0.965305 0.001462</xyz>
+          <limit>
+            <lower>-2.79</lower>
+            <upper>-0.087</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/right_lower_arm'>
+        <pose>-0.653161 -0.109193 1.25664 -3.01125 1.55909 0.389321</pose>
+        <inertial>
+          <pose>0.000356 -0.001227 0.17653 0 -0 0</pose>
+          <mass>6.93996</mass>
+          <inertia>
+            <ixx>0.012525</ixx>
+            <ixy>0.000244647</ixy>
+            <ixz>0.000520899</ixz>
+            <iyy>0.0395064</iyy>
+            <iyz>0.000169146</iyz>
+            <izz>0.0403843</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_lower_arm_collision'>
+          <pose>0 0 0.1 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Forearm.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_lower_arm_visual'>
+          <pose>0 0 0.1 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Forearm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/joint4' type='revolute'>
+        <child>/r2/right_lower_arm</child>
+        <parent>/r2/right_elbow</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.966589 -0.256069 -0.01161</xyz>
+          <limit>
+            <lower>-4.45</lower>
+            <upper>1.31</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/right_wrist_pitch'>
+        <pose>-0.998181 -0.200596 1.25249 -1.47835 1.55909 0.389321</pose>
+        <inertial>
+          <pose>0.000922 -0.004064 0 0 -0 0</pose>
+          <mass>0.116573</mass>
+          <inertia>
+            <ixx>1.69438e-05</ixx>
+            <ixy>5.4431e-08</ixy>
+            <ixz>-4.36033e-11</ixz>
+            <iyy>4.41886e-05</iyy>
+            <iyz>-1.75876e-06</iyz>
+            <izz>5.765e-05</izz>
+          </inertia>
+        </inertial>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/joint5' type='revolute'>
+        <child>/r2/right_wrist_pitch</child>
+        <parent>/r2/right_lower_arm</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.29254 0.956253 0.001081</xyz>
+          <limit>
+            <lower>-1.22</lower>
+            <upper>1.22</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/right_wrist_yaw'>
+        <pose>-1.00439 -0.202495 1.25256 3.13092 -0.009844 -2.8447</pose>
+        <inertial>
+          <pose>0.06374 -0.000207 0.021899 0 -0 0</pose>
+          <mass>1.33941</mass>
+          <inertia>
+            <ixx>0.00516672</ixx>
+            <ixy>-5.80194e-05</ixy>
+            <ixz>-0.000187327</ixz>
+            <iyy>0.00807358</iyy>
+            <iyz>0.000316215</iyz>
+            <izz>0.00654117</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_wrist_yaw_collision_/r2/right_palm'>
+          <pose>0 0 0 3.14 -0 1.5999</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Palm.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+            </friction>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_wrist_yaw_visual_/r2/right_palm'>
+          <pose>0 0 0 3.14 -0 1.5999</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Palm.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/joint6' type='revolute'>
+        <child>/r2/right_wrist_yaw</child>
+        <parent>/r2/right_wrist_pitch</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.012536 0.00733 -0.999895</xyz>
+          <limit>
+            <lower>-0.785</lower>
+            <upper>0.785</upper>
+            <effort>100</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/right_index_yaw'>
+        <pose>-1.09137 -0.257636 1.2694 3.1298 -0.008469 -2.72253</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/index/joint0' type='revolute'>
+        <child>/r2/right_index_yaw</child>
+        <parent>/r2/right_wrist_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.012536 0.00733 -0.999895</xyz>
+          <limit>
+            <lower>-0.3491</lower>
+            <upper>0.3491</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_index_proximal'>
+        <pose>-1.10018 -0.261563 1.26948 -1.58259 -0.008469 -2.72253</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_index_proximal_collision'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_index_proximal_visual'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/index/joint1' type='revolute'>
+        <child>/r2/right_index_proximal</child>
+        <parent>/r2/right_index_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.406785 -0.913448 -0.011797</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_index_medial'>
+        <pose>-1.14079 -0.279649 1.26986 -1.58259 -0.008469 -2.72253</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_index_medial_collision'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_index_medial_visual'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/index/joint2' type='revolute'>
+        <child>/r2/right_index_medial</child>
+        <parent>/r2/right_index_proximal</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.406785 -0.913448 -0.011797</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_index_distal'>
+        <pose>-1.16863 -0.292051 1.27012 -1.58259 -0.008469 -2.72253</pose>
+        <inertial>
+          <pose>0.012319 0 0 0 -0 0</pose>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00201518</iyy>
+            <iyz>0</iyz>
+            <izz>0.00201518</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_index_distal_collision'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_index_distal_visual'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/index/joint3' type='revolute'>
+        <child>/r2/right_index_distal</child>
+        <parent>/r2/right_index_medial</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.406785 -0.913448 -0.011797</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_middle_yaw'>
+        <pose>-1.10525 -0.236187 1.26973 3.13092 -0.009844 -2.8447</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.001</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/middle/joint0' type='revolute'>
+        <child>/r2/right_middle_yaw</child>
+        <parent>/r2/right_wrist_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.012536 0.00733 -0.999895</xyz>
+          <limit>
+            <lower>-0.3491</lower>
+            <upper>0.3491</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_middle_proximal'>
+        <pose>-1.11448 -0.239011 1.26983 -1.58147 -0.009844 -2.8447</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_middle_proximal_collision'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_middle_proximal_visual'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/middle/joint1' type='revolute'>
+        <child>/r2/right_middle_proximal</child>
+        <parent>/r2/right_middle_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.292433 -0.956226 -0.010677</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_middle_medial'>
+        <pose>-1.15698 -0.252014 1.27026 -1.58147 -0.009844 -2.8447</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_middle_medial_collision'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_middle_medial_visual'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/middle/joint2' type='revolute'>
+        <child>/r2/right_middle_medial</child>
+        <parent>/r2/right_middle_proximal</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.292433 -0.956226 -0.010677</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_middle_distal'>
+        <pose>-1.18612 -0.260931 1.27056 -1.58147 -0.009844 -2.8447</pose>
+        <inertial>
+          <pose>0.012319 0 0 0 -0 0</pose>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00201518</iyy>
+            <iyz>0</iyz>
+            <izz>0.00201518</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_middle_distal_collision'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_middle_distal_visual'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/middle/joint3' type='revolute'>
+        <child>/r2/right_middle_distal</child>
+        <parent>/r2/right_middle_medial</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.292433 -0.956226 -0.010677</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_little_proximal'>
+        <pose>-1.10661 -0.191612 1.26001 -1.61453 0.075715 -3.02</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_little_proximal_collision'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_little_proximal_visual'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/little/joint0' type='revolute'>
+        <child>/r2/right_little_proximal</child>
+        <parent>/r2/right_wrist_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.124457 -0.991267 -0.043598</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_little_medial'>
+        <pose>-1.15061 -0.196988 1.25665 -1.61453 0.075715 -3.02</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_little_medial_collision'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_little_medial_visual'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/little/joint1' type='revolute'>
+        <child>/r2/right_little_medial</child>
+        <parent>/r2/right_little_proximal</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.124457 -0.991267 -0.043598</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_little_distal'>
+        <pose>-1.18078 -0.200675 1.25434 -1.61453 0.075715 -3.02</pose>
+        <inertial>
+          <pose>0.012319 0 0 0 -0 0</pose>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00201518</iyy>
+            <iyz>0</iyz>
+            <izz>0.00201518</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_little_distal_collision'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_little_distal_visual'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/little/joint2' type='revolute'>
+        <child>/r2/right_little_distal</child>
+        <parent>/r2/right_little_medial</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.124457 -0.991267 -0.043598</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_ring_proximal'>
+        <pose>-1.11373 -0.215386 1.26615 -1.58019 -0.011072 -2.96687</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_ring_proximal_collision'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_ring_proximal_visual'>
+          <pose>0 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/ring/joint0' type='revolute'>
+        <child>/r2/right_ring_proximal</child>
+        <parent>/r2/right_wrist_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.173722 -0.98475 -0.009397</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_ring_medial'>
+        <pose>-1.1575 -0.223112 1.26665 -1.58019 -0.011072 -2.96687</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_ring_medial_collision'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_ring_medial_visual'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Mid.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/ring/joint1' type='revolute'>
+        <child>/r2/right_ring_medial</child>
+        <parent>/r2/right_ring_proximal</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.173722 -0.98475 -0.009397</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_ring_distal'>
+        <pose>-1.18751 -0.22841 1.26698 -1.58019 -0.011072 -2.96687</pose>
+        <inertial>
+          <pose>0.012319 0 0 0 -0 0</pose>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00201518</iyy>
+            <iyz>0</iyz>
+            <izz>0.00201518</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_ring_distal_collision'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_ring_distal_visual'>
+          <pose>0 0 0 0 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Finger_Dist.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/ring/joint2' type='revolute'>
+        <child>/r2/right_ring_distal</child>
+        <parent>/r2/right_ring_medial</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.173722 -0.98475 -0.009397</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>2.9671</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_thumb_base'>
+        <pose>-1.02713 -0.241254 1.24621 -1.58324 -0.166754 -1.53364</pose>
+        <inertial>
+          <pose>0.005969 0 0 0 -0 0</pose>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00200356</iyy>
+            <iyz>-5.16988e-26</iyz>
+            <izz>0.00200356</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_thumb_base_collision_/r2/right_thumb_proximal'>
+          <pose>0.001938 0 0 -3.1408 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Left_Thumb_Carp.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_thumb_base_visual_/r2/right_thumb_proximal'>
+          <pose>0.001938 0 0 -3.1408 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Left_Thumb_Carp.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/thumb/joint0' type='revolute'>
+        <child>/r2/right_thumb_base</child>
+        <parent>/r2/right_wrist_yaw</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.999309 0.035079 -0.012272</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.2217</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_thumb_medial_prime'>
+        <pose>-1.02669 -0.253018 1.24819 3.12915 -0.166754 -1.53364</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_thumb_medial_prime_collision'>
+          <pose>-0 0 0 -1.57 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>0.9 0.9 0.9</scale>
+              <uri>model://robonaut/meshes/Right_Thumb_MtCar.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_thumb_medial_prime_visual'>
+          <pose>-0 0 0 -1.57 -1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Right_Thumb_MtCar.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/thumb/joint1' type='revolute'>
+        <child>/r2/right_thumb_medial_prime</child>
+        <parent>/r2/right_thumb_base</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.00627 -0.166318 -0.986052</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.3963</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_thumb_medial'>
+        <pose>-1.02365 -0.282816 1.25577 -2.4559 -0.166754 -1.53364</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_thumb_medial_collision'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Thumb_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_thumb_medial_visual'>
+          <pose>0 0 0 3.14 0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Thumb_Proximal.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/thumb/joint2' type='revolute'>
+        <child>/r2/right_thumb_medial</child>
+        <parent>/r2/right_thumb_medial_prime</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.637541 -0.104858 -0.763247</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.2217</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/right_thumb_distal'>
+        <pose>-1.0222 -0.321613 1.26231 -2.4559 -0.166754 -1.53364</pose>
+        <inertial>
+          <pose>0.01651 0 0 0 -0 0</pose>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00202726</iyy>
+            <iyz>0</iyz>
+            <izz>0.00202726</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/right_thumb_distal_collision'>
+          <pose>0 0 0 -0.001593 0.001593 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Thumb_Dist.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/right_thumb_distal_visual'>
+          <pose>0 0 0 -0.001593 0.001593 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Thumb_Dist.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/right_arm/hand/thumb/joint3' type='revolute'>
+        <child>/r2/right_thumb_distal</child>
+        <parent>/r2/right_thumb_medial</parent>
+        <axis>
+          <xyz expressed_in='__model__'>0.637541 -0.104858 -0.763247</xyz>
+          <limit>
+            <lower>-0.5236</lower>
+            <upper>1.57</upper>
+            <effort>1e+07</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>0.1</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='/r2/neck_base'>
+        <pose>-0.000348 -0.087337 1.33408 1.5708 0.001593 -1.57478</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/neck_base_collision'>
+          <pose>0 0 0 -1.57 1.57 -0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Neck_Lower.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/neck_base_visual'>
+          <pose>0 0 0 -1.57 1.57 -0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Neck_Lower.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/neck/joint0' type='revolute'>
+        <child>/r2/neck_base</child>
+        <parent>/r2/waist_center</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.999992 0.003982 -0</xyz>
+          <limit>
+            <lower>-0.7</lower>
+            <upper>0.175</upper>
+            <effort>10000</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>10</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/neck_lower_pitch'>
+        <pose>-4.4e-05 -0.011138 1.33421 1e-06 0.001593 -1.57478</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/neck_lower_pitch_collision'>
+          <pose>0.075 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Neck_Upper.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/neck_lower_pitch_visual'>
+          <pose>0.075 0 0 0 -0 1.57</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Neck_Upper.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/neck/joint1' type='revolute'>
+        <child>/r2/neck_lower_pitch</child>
+        <parent>/r2/neck_base</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-7e-06 -0.001593 0.999999</xyz>
+          <limit>
+            <lower>-1.22</lower>
+            <upper>1.22</upper>
+            <effort>10000</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>10</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <link name='/r2/neck_roll'>
+        <pose>-0.000248 -0.062221 1.51189 1.5708 0.001593 -1.57478</pose>
+        <inertial>
+          <pose>0.081499 0.101613 -0.011025 0 -0 0</pose>
+          <mass>1.13</mass>
+          <inertia>
+            <ixx>0.0270085</ixx>
+            <ixy>-0.00227738</ixy>
+            <ixz>0.000477847</ixz>
+            <iyy>0.0262663</iyy>
+            <iyz>0.000477211</iyz>
+            <izz>0.0277254</izz>
+          </inertia>
+        </inertial>
+        <collision name='/r2/neck_roll_collision'>
+          <pose>-0 0.07 0 0 1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Head.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='/r2/neck_roll_visual'>
+          <pose>-0 0.07 0 0 1.57 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robonaut/meshes/Head.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <sensor name='asus/ir' type='depth'>
+          <update_rate>1</update_rate>
+          <camera name='__default__'>
+            <image>
+              <format>L8</format>
+              <width>640</width>
+              <height>480</height>
+            </image>
+            <horizontal_fov>0.9948</horizontal_fov>
+            <clip>
+              <near>0.01</near>
+              <far>5</far>
+            </clip>
+          </camera>
+          <pose>0.12 0.14 -0.015 1.5708 -0 0</pose>
+        </sensor>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <sensor name='asus/rgb' type='depth'>
+          <update_rate>1</update_rate>
+          <camera name='__default__'>
+            <image>
+              <format>R8G8B8</format>
+              <width>640</width>
+              <height>480</height>
+            </image>
+            <horizontal_fov>0.9948</horizontal_fov>
+            <clip>
+              <near>0.01</near>
+              <far>5</far>
+            </clip>
+          </camera>
+          <pose>0.12 0.14 -0.045 -1.57239 -0 0</pose>
+        </sensor>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <sensor name='/r2/neck/head/camera0' type='camera'>
+          <update_rate>10</update_rate>
+          <camera name='__default__'>
+            <image>
+              <width>1600</width>
+              <height>1200</height>
+              <format>R8G8B8</format>
+            </image>
+            <horizontal_fov>1.5707</horizontal_fov>
+            <clip>
+              <near>0.1</near>
+              <far>50</far>
+            </clip>
+          </camera>
+          <pose>0.084487 0.107466 -0.048892 -1.57159 0.002389 -2e-06</pose>
+        </sensor>
+        <gravity>1</gravity>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <sensor name='/r2/neck/head/camera1' type='camera'>
+          <update_rate>10</update_rate>
+          <camera name='__default__'>
+            <image>
+              <width>1600</width>
+              <height>1200</height>
+              <format>R8G8B8</format>
+            </image>
+            <horizontal_fov>1.5707</horizontal_fov>
+            <clip>
+              <near>0.1</near>
+              <far>50</far>
+            </clip>
+          </camera>
+          <pose>0.084643 0.107544 0.048848 -1.57159 0.002389 -2e-06</pose>
+        </sensor>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='/r2/neck/joint2' type='revolute'>
+        <child>/r2/neck_roll</child>
+        <parent>/r2/neck_lower_pitch</parent>
+        <axis>
+          <xyz expressed_in='__model__'>-0.999992 0.003982 -0</xyz>
+          <limit>
+            <lower>-0.7</lower>
+            <upper>0.175</upper>
+            <effort>10000</effort>
+            <velocity>1000</velocity>
+          </limit>
+          <dynamics>
+            <damping>10</damping>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+        <physics>
+          <ode>
+            <limit>
+              <cfm>0</cfm>
+              <erp>0.2</erp>
+            </limit>
+          </ode>
+        </physics>
+      </joint>
+      <static>0</static>
+      <pose>-0.978892 -0.867176 0 0 -0 0</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>162 207000000</sim_time>
+      <real_time>212 678557411</real_time>
+      <wall_time>1604274133 931067049</wall_time>
+      <iterations>162207</iterations>
+      <model name='asphalt_plane'>
+        <pose>-3.13023 0.98883 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3.13023 0.98883 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box'>
+        <pose>-7.5154 5.21849 0.199 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-7.5154 5.21849 0.199 0 -0 0</pose>
+          <velocity>0 0 5e-06 0 -0 0</velocity>
+          <acceleration>-0 0 0 0 -0 0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_0'>
+        <pose>-4.57723 5.28688 0.199 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-4.57723 5.28688 0.199 0 -0 0</pose>
+          <velocity>0 0 5e-06 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_1'>
+        <pose>1.98528 4.78466 0.199 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>1.98528 4.78466 0.199 0 -0 0</pose>
+          <velocity>0 0 5e-06 0 -0 0</velocity>
+          <acceleration>-0 -0 0 0 -0 0</acceleration>
+          <wrench>-0 -0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='cardboard_box_2'>
+        <pose>-0.334783 5.12349 0.199 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-0.334783 5.12349 0.199 0 -0 0</pose>
+          <velocity>0 0 5e-06 0 -0 0</velocity>
+          <acceleration>-0 0 0 0 -0 0</acceleration>
+          <wrench>-0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='jersey_barrier'>
+        <pose>-4.13725 -6.29572 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-4.13725 -6.29572 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='jersey_barrier_0'>
+        <pose>1.74869 -6.33802 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>1.74869 -6.33802 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='jersey_barrier_1'>
+        <pose>-7.8424 -2.85387 0 0 -0 1.55378</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-7.8424 -2.85387 0 0 -0 1.55378</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='jersey_barrier_2'>
+        <pose>4.95637 -2.95521 0 0 -0 1.52217</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>4.95637 -2.95521 0 0 -0 1.52217</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='jersey_barrier_3'>
+        <pose>5.13964 2.07137 0 0 -0 1.51773</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>5.13964 2.07137 0 0 -0 1.51773</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='jersey_barrier_4'>
+        <pose>-7.86009 1.99781 0 0 -0 1.53779</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-7.86009 1.99781 0 0 -0 1.53779</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='r2'>
+        <pose>-0.879172 -0.915778 0.100797 -0.000797 7e-06 -0.156709</pose>
+        <scale>1 1 1</scale>
+        <link name='/r2/left_elbow'>
+          <pose>-0.577455 -0.974605 1.00307 1.5655 0.293364 1.10204</pose>
+          <velocity>-0.002624 -0.011649 -0.000299 -0.044818 0.0402 0.057629</velocity>
+          <acceleration>1.40431 -0.533027 -3.59632 -0.431032 0.163257 -1.29994</acceleration>
+          <wrench>4.17226 -1.58364 -10.6848 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_index_distal'>
+          <pose>-0.44337 -0.989801 0.541682 3.04492 0.907444 -0.954539</pose>
+          <velocity>-0.01709 -0.031019 -0.004627 -0.07632 0.045223 0.002465</velocity>
+          <acceleration>-0.981762 0.600128 -1.85921 -2.15942 -0.575097 1.57282</acceleration>
+          <wrench>-0.001964 0.0012 -0.003718 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_index_medial'>
+          <pose>-0.46656 -0.990174 0.561461 -2.50735 0.706161 0.015873</pose>
+          <velocity>-0.016649 -0.030366 -0.00327 -0.074799 0.043553 0.00422</velocity>
+          <acceleration>-1.01807 0.624698 -1.83596 -2.15564 -0.607431 1.61999</acceleration>
+          <wrench>-0.001018 0.000625 -0.001836 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_index_proximal'>
+          <pose>-0.501264 -0.992769 0.589111 -2.46991 0.671381 0.074752</pose>
+          <velocity>-0.015542 -0.028709 -0.001762 -0.070902 0.039276 0.008706</velocity>
+          <acceleration>-1.02548 0.614588 -1.90309 -2.00487 -0.746563 1.75639</acceleration>
+          <wrench>-0.001025 0.000615 -0.001903 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_index_yaw'>
+          <pose>-0.509076 -0.994106 0.594619 2.29909 0.607249 0.169545</pose>
+          <velocity>-0.015358 -0.028524 -0.001529 -0.061488 0.028944 0.019547</velocity>
+          <acceleration>-1.01263 0.59707 -1.99832 -1.55771 -1.1847 2.19928</acceleration>
+          <wrench>-0.001013 0.000597 -0.001998 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_little_distal'>
+          <pose>-0.525101 -0.954825 0.495162 1.98684 0.564474 -1.92504</pose>
+          <velocity>-0.017157 -0.035802 -0.005397 -0.084187 0.023032 0.000111</velocity>
+          <acceleration>-0.408179 0.304813 -2.25366 -2.95141 1.02666 -0.777988</acceleration>
+          <wrench>-0.000816 0.00061 -0.004507 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_little_medial'>
+          <pose>-0.539242 -0.958557 0.521903 -2.36262 1.07037 0.257901</pose>
+          <velocity>-0.016713 -0.034152 -0.003827 -0.082801 0.022114 0.00072</velocity>
+          <acceleration>-0.581164 0.409865 -2.27763 -2.90626 0.933998 -0.752463</acceleration>
+          <wrench>-0.000581 0.00041 -0.002278 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_little_proximal'>
+          <pose>-0.56113 -0.966672 0.559727 -2.27838 1.01773 0.355292</pose>
+          <velocity>-0.015973 -0.031258 -0.002816 -0.078118 0.019002 0.002757</velocity>
+          <acceleration>-0.781499 0.521574 -2.41486 -2.72678 0.870496 -0.678818</acceleration>
+          <wrench>-0.000781 0.000522 -0.002415 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_lower_arm'>
+          <pose>-0.554089 -0.928462 0.987449 -3.05208 0.279764 1.42423</pose>
+          <velocity>-0.002061 0.000648 -0.008447 -0.050973 0.026132 0.005893</velocity>
+          <acceleration>-0.08861 0.160609 -3.42421 2.70722 -1.40089 1.81684</acceleration>
+          <wrench>-0.614951 1.11462 -23.7639 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_middle_distal'>
+          <pose>-0.465428 -0.96592 0.515772 2.65791 0.981341 -1.24273</pose>
+          <velocity>-0.017661 -0.033027 -0.005727 -0.080638 0.041345 0.004521</velocity>
+          <acceleration>-0.8642 0.554659 -1.97811 -1.92603 -0.909967 1.97206</acceleration>
+          <wrench>-0.001728 0.001109 -0.003956 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_middle_medial'>
+          <pose>-0.484983 -0.969325 0.538904 -2.42742 0.861511 0.172574</pose>
+          <velocity>-0.017113 -0.032135 -0.004204 -0.078761 0.039828 0.005888</velocity>
+          <acceleration>-0.909857 0.579303 -1.95354 -1.90089 -0.953446 2.0253</acceleration>
+          <wrench>-0.00091 0.000579 -0.001954 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_middle_proximal'>
+          <pose>-0.514437 -0.976566 0.571395 -2.37636 0.819793 0.241083</pose>
+          <velocity>-0.015881 -0.030019 -0.002655 -0.073779 0.035809 0.009505</velocity>
+          <acceleration>-0.921454 0.569391 -2.0178 -1.73736 -1.06408 2.11385</acceleration>
+          <wrench>-0.000921 0.000569 -0.002018 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_middle_yaw'>
+          <pose>-0.521123 -0.978966 0.577936 2.40858 0.744378 0.343898</pose>
+          <velocity>-0.015667 -0.029733 -0.002403 -0.062247 0.026504 0.01788</velocity>
+          <acceleration>-0.90956 0.556651 -2.1082 -1.53114 -1.18792 2.20512</acceleration>
+          <wrench>-0.00091 0.000557 -0.002108 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_ring_distal'>
+          <pose>-0.494209 -0.953651 0.503553 2.36914 0.98245 -1.45202</pose>
+          <velocity>-0.016922 -0.034825 -0.005675 -0.08708 0.024997 -0.002858</velocity>
+          <acceleration>-0.431621 0.297099 -2.07818 -2.88217 1.02969 -0.768015</acceleration>
+          <wrench>-0.000863 0.000594 -0.004156 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_ring_medial'>
+          <pose>-0.510825 -0.959082 0.528515 -2.3365 0.959985 0.315846</pose>
+          <velocity>-0.016617 -0.033566 -0.004206 -0.085039 0.023638 -0.001791</velocity>
+          <acceleration>-0.618418 0.410969 -2.12324 -2.84378 0.942659 -0.74041</acceleration>
+          <wrench>-0.000618 0.000411 -0.002123 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_ring_proximal'>
+          <pose>-0.535998 -0.969394 0.563674 -2.27773 0.912239 0.388792</pose>
+          <velocity>-0.015906 -0.030801 -0.002924 -0.07945 0.019912 0.001114</velocity>
+          <acceleration>-0.805624 0.515544 -2.27357 -2.66958 0.881123 -0.655696</acceleration>
+          <wrench>-0.000806 0.000516 -0.002274 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_shoulder_pitch'>
+          <pose>-0.579018 -0.976812 1.36363 1.73008 -0.010134 -0.410287</pose>
+          <velocity>0.008959 0.001476 -0.002006 -0.026549 0.040294 0.013338</velocity>
+          <acceleration>4.82393 -0.888042 -4.04497 2.97331 -1.25668 -1.38542</acceleration>
+          <wrench>21.3558 -3.93141 -17.9073 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_shoulder_roll'>
+          <pose>-0.869558 -0.851006 1.36509 1.57549 -0.159279 1.16142</pose>
+          <velocity>0.007428 -0.001933 -0.002847 -0.037447 0.015639 0.009178</velocity>
+          <acceleration>4.74141 -0.932778 -4.0057 1.70047 -1.25484 3.11565</acceleration>
+          <wrench>29.2491 -5.75418 -24.7106 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_thumb_base'>
+          <pose>-0.557851 -1.03083 0.629337 0.636944 -0.216287 -0.61475</pose>
+          <velocity>-0.014682 -0.026581 0.00129 -0.05956 0.017387 -0.004256</velocity>
+          <acceleration>-1.17293 0.696721 -2.38807 1.75184 1.02578 0.421827</acceleration>
+          <wrench>-0.05982 0.035533 -0.121792 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_thumb_distal'>
+          <pose>-0.484533 -1.06482 0.624762 -1.64827 -0.142066 -0.395433</pose>
+          <velocity>-0.014922 -0.026516 0.000934 -0.046087 0.046414 0.007185</velocity>
+          <acceleration>-1.22737 0.696384 -2.17319 0.52457 -0.257406 0.015741</acceleration>
+          <wrench>-0.002455 0.001393 -0.004346 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_thumb_medial'>
+          <pose>-0.519652 -1.04902 0.632946 -1.6492 0.209446 -0.422756</pose>
+          <velocity>-0.01453 -0.026173 0.001342 -0.047398 0.043361 0.007441</velocity>
+          <acceleration>-1.24068 0.698751 -2.13136 0.462079 -0.420113 0.03057</acceleration>
+          <wrench>-0.001241 0.000699 -0.002131 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_thumb_medial_prime'>
+          <pose>-0.548323 -1.03755 0.631899 -0.949509 0.064255 -0.411368</pose>
+          <velocity>-0.014661 -0.026465 0.00166 -0.051793 0.033157 0.008294</velocity>
+          <acceleration>-1.23179 0.692519 -2.19113 0.338264 -0.693202 0.053316</acceleration>
+          <wrench>-0.001232 0.000693 -0.002191 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_upper_arm'>
+          <pose>-0.579018 -0.976812 1.36363 3.14046 -0.15881 1.10439</pose>
+          <velocity>0.013994 0.00684 -0.002837 -0.030758 0.032441 0.056729</velocity>
+          <acceleration>3.75611 -1.21316 -3.30811 0.833859 -0.006357 -2.63834</acceleration>
+          <wrench>18.2301 -5.88802 -16.0557 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_wrist_pitch'>
+          <pose>-0.600005 -1.02094 0.645649 1.64606 -0.588282 1.36438</pose>
+          <velocity>-0.014538 -0.025587 0.001171 -0.06511 0.021821 0.018616</velocity>
+          <acceleration>-1.23263 0.824481 -2.31427 -2.94082 -0.167787 2.26001</acceleration>
+          <wrench>-0.143691 0.096112 -0.269782 0 -0 0</wrench>
+        </link>
+        <link name='/r2/left_wrist_yaw'>
+          <pose>-0.599767 -1.01757 0.640602 2.41651 0.752011 0.355558</pose>
+          <velocity>-0.01407 -0.02255 0.000589 -0.066892 0.011533 0.007642</velocity>
+          <acceleration>-0.95149 0.617336 -2.63355 -2.35122 -1.01199 2.25255</acceleration>
+          <wrench>-2.26342 1.46853 -6.26474 0 -0 0</wrench>
+        </link>
+        <link name='/r2/neck_base'>
+          <pose>-0.891823 -1.00112 1.43495 1.57082 -0.160137 -1.71805</pose>
+          <velocity>0.010194 -0.0014 -0.003318 -0.021057 0.01591 0.010036</velocity>
+          <acceleration>4.79718 -0.442526 -5.52607 0.102105 -0.366068 -2.12864</acceleration>
+          <wrench>0.479718 -0.044253 -0.552607 0 -0 0</wrench>
+        </link>
+        <link name='/r2/neck_lower_pitch'>
+          <pose>-0.880786 -0.926709 1.4228 -0.126672 -0.098247 -0.803602</pose>
+          <velocity>0.00887 -0.0015 -0.004403 -0.020508 0.002678 0.021278</velocity>
+          <acceleration>5.2815 -0.873494 -4.94847 3.06874 1.18042 2.81118</acceleration>
+          <wrench>0.52815 -0.087349 -0.494847 0 -0 0</wrench>
+        </link>
+        <link name='/r2/neck_roll'>
+          <pose>-0.841537 -0.935062 1.60327 1.41832 0.595572 -0.902089</pose>
+          <velocity>0.007169 -0.000316 -0.007481 -0.027665 -0.018994 0.024589</velocity>
+          <acceleration>5.30288 -2.33601 -1.03974 -1.27778 -1.50094 1.69767</acceleration>
+          <wrench>5.99226 -2.63969 -1.17491 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_elbow'>
+          <pose>-1.19514 -0.88417 1.00225 -1.57793 -0.292133 -0.681104</pose>
+          <velocity>0.024022 -0.009985 -0.000334 -0.0029 -0.033362 0.012542</velocity>
+          <acceleration>-0.074956 0.647302 -0.261819 -0.22696 -1.29439 -0.375445</acceleration>
+          <wrench>-0.222698 1.92315 -0.777872 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_index_distal'>
+          <pose>-1.16592 -0.884273 0.45518 1.65141 0.913949 -1.66354</pose>
+          <velocity>0.058934 -0.011304 0.00138 0.093533 -0.175451 -0.005673</velocity>
+          <acceleration>-0.894396 0.059105 1.21855 0.847423 0.318145 0.462054</acceleration>
+          <wrench>-0.08944 0.005911 0.121855 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_index_medial'>
+          <pose>-1.1675 -0.884681 0.485615 -2.73397 1.51721 0.251513</pose>
+          <velocity>0.055577 -0.011213 0.000301 0.027586 -0.165036 -0.008958</velocity>
+          <acceleration>-0.88931 0.023801 1.28159 0.860384 0.314945 0.448472</acceleration>
+          <wrench>-0.044466 0.00119 0.06408 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_index_proximal'>
+          <pose>-1.17025 -0.88806 0.529859 -2.09771 1.47286 0.889332</pose>
+          <velocity>0.048604 -0.010074 -5.7e-05 -0.025009 -0.156731 -0.011572</velocity>
+          <acceleration>-0.872528 -0.040505 1.22536 1.46173 0.21919 0.468831</acceleration>
+          <wrench>-0.043626 -0.002025 0.061268 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_index_yaw'>
+          <pose>-1.17084 -0.888829 0.539456 2.63404 1.46946 0.908792</pose>
+          <velocity>0.047063 -0.010015 -0.000173 -0.005607 -0.159795 -0.010602</velocity>
+          <acceleration>-0.866396 -0.081415 1.12518 -1.96109 -0.240313 0.610329</acceleration>
+          <wrench>-0.04332 -0.004071 0.056259 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_little_distal'>
+          <pose>-1.08879 -0.912477 0.474857 2.00972 0.983368 -1.33613</pose>
+          <velocity>0.052001 -0.010808 0.007686 0.048594 -0.101485 0.006055</velocity>
+          <acceleration>-0.698121 0.114288 1.12845 -2.42776 -1.07784 2.77837</acceleration>
+          <wrench>-0.069812 0.011429 0.112845 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_little_medial'>
+          <pose>-1.09588 -0.911346 0.504482 3.12246 1.33299 -0.157547</pose>
+          <velocity>0.050273 -0.010322 0.006868 0.002035 -0.095026 -0.005336</velocity>
+          <acceleration>-0.785548 0.03018 1.17502 -0.555257 -0.796549 -3.04883</acceleration>
+          <wrench>-0.039277 0.001509 0.058751 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_little_proximal'>
+          <pose>-1.10622 -0.909706 0.547685 3.12246 1.33299 -0.157548</pose>
+          <velocity>0.046178 -0.01036 0.005876 0.002124 -0.09503 -0.005314</velocity>
+          <acceleration>-0.869695 -0.085305 1.10581 -0.556098 -0.853453 -3.05187</acceleration>
+          <wrench>-0.043485 -0.004265 0.055291 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_lower_arm'>
+          <pose>-1.23512 -0.851764 0.986771 -2.88262 -0.136768 -1.78332</pose>
+          <velocity>0.019234 -0.010674 -0.003282 0.000335 -0.035625 -0.001124</velocity>
+          <acceleration>-0.421392 0.002376 -0.079605 2.8672 -1.139 1.7081</acceleration>
+          <wrench>-2.92445 0.016493 -0.552455 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_middle_distal'>
+          <pose>-1.14135 -0.8899 0.449738 1.7148 1.20492 -1.59304</pose>
+          <velocity>0.059127 -0.011741 0.002024 0.0405 -0.16538 -0.008065</velocity>
+          <acceleration>-0.621967 0.097298 0.234941 0.53008 0.952159 0.483201</acceleration>
+          <wrench>-0.062197 0.00973 0.023494 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_middle_medial'>
+          <pose>-1.1427 -0.888448 0.480148 2.47874 1.50562 -0.820714</pose>
+          <velocity>0.056148 -0.011434 0.001617 0.005729 -0.159881 -0.009874</velocity>
+          <acceleration>-0.58477 0.064884 0.234316 0.841347 0.906659 0.490219</acceleration>
+          <wrench>-0.029239 0.003244 0.011716 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_middle_proximal'>
+          <pose>-1.14546 -0.891373 0.524413 -2.17233 1.47995 0.814363</pose>
+          <velocity>0.049309 -0.009921 0.001295 -0.033464 -0.153683 -0.011909</velocity>
+          <acceleration>-0.551593 -0.018187 0.233394 1.84481 0.750119 0.532837</acceleration>
+          <wrench>-0.02758 -0.000909 0.01167 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_middle_yaw'>
+          <pose>-1.14608 -0.892145 0.533993 2.6155 1.46838 0.890153</pose>
+          <velocity>0.047871 -0.009762 0.000835 -0.00538 -0.158121 -0.010445</velocity>
+          <acceleration>-0.432592 -0.063545 -0.047946 -1.99357 0.369935 0.659351</acceleration>
+          <wrench>-0.000433 -6.4e-05 -4.8e-05 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_ring_distal'>
+          <pose>-1.11088 -0.901605 0.459541 2.31134 1.29371 -1.01851</pose>
+          <velocity>0.053381 -0.010667 0.005325 0.012334 -0.096668 -0.003251</velocity>
+          <acceleration>-0.704067 0.054152 1.10359 -2.81021 -1.44775 2.88067</acceleration>
+          <wrench>-0.070407 0.005415 0.110359 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_ring_medial'>
+          <pose>-1.11642 -0.90065 0.489493 3.14123 1.38517 -0.1693</pose>
+          <velocity>0.051707 -0.010396 0.004951 -0.003192 -0.09402 -0.00621</velocity>
+          <acceleration>-0.778887 0.015265 1.1504 -1.93139 -1.27282 3.04836</acceleration>
+          <wrench>-0.038944 0.000763 0.05752 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_ring_proximal'>
+          <pose>-1.12451 -0.899275 0.533179 3.14123 1.38517 -0.169301</pose>
+          <velocity>0.047609 -0.010211 0.004173 -0.00311 -0.094029 -0.006193</velocity>
+          <acceleration>-0.845892 -0.039356 1.08715 -1.93623 -1.31983 3.04696</acceleration>
+          <wrench>-0.042295 -0.001968 0.054357 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_shoulder_pitch'>
+          <pose>-1.18837 -0.887609 1.36141 -1.45234 0.120028 0.13705</pose>
+          <velocity>0.006526 -0.004496 -0.000213 -0.014858 -0.046393 0.006278</velocity>
+          <acceleration>4.19007 -0.99264 -0.491089 -2.67866 0.664962 -2.92421</acceleration>
+          <wrench>18.5497 -4.39447 -2.17408 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_shoulder_roll'>
+          <pose>-0.869557 -0.851006 1.36509 1.58233 0.117683 -1.45514</pose>
+          <velocity>0.007591 0.000211 -0.003997 -0.021366 0.006686 0.012597</velocity>
+          <acceleration>4.67772 -1.02023 -2.87216 -1.05845 -0.612938 2.7564</acceleration>
+          <wrench>28.8562 -6.29363 -17.7179 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_thumb_base'>
+          <pose>-1.18267 -0.915603 0.603303 -0.044595 0.334541 3.11004</pose>
+          <velocity>0.040668 -0.010064 -0.000911 -0.006865 -0.096397 0.02705</velocity>
+          <acceleration>-0.980674 -0.323942 0.808351 0.680857 -1.1322 -2.65705</acceleration>
+          <wrench>-0.098067 -0.032394 0.080835 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_thumb_distal'>
+          <pose>-1.19486 -0.914716 0.529891 1.52448 1.27944 -0.757373</pose>
+          <velocity>0.050354 -0.010902 -0.003227 0.01939 -0.144224 0.023128</velocity>
+          <acceleration>-0.975039 -0.055538 0.929845 2.50631 -0.736192 0.655862</acceleration>
+          <wrench>-0.097504 -0.005554 0.092984 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_thumb_medial'>
+          <pose>-1.19795 -0.91136 0.568997 1.45588 1.45453 -0.827149</pose>
+          <velocity>0.046479 -0.010902 -0.003235 0.008067 -0.157318 0.02336</velocity>
+          <acceleration>-1.02185 -0.199916 0.996438 2.59888 -0.714938 0.663131</acceleration>
+          <wrench>-0.051093 -0.009996 0.049822 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_thumb_medial_prime'>
+          <pose>-1.19394 -0.915249 0.599385 -2.10687 1.48826 2.59011</pose>
+          <velocity>0.04122 -0.010559 -0.00251 -0.008196 -0.176122 0.023691</velocity>
+          <acceleration>-0.98937 -0.316273 0.927823 -2.33837 0.854993 0.62637</acceleration>
+          <wrench>-0.049469 -0.015814 0.046391 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_upper_arm'>
+          <pose>-1.18837 -0.887608 1.36141 3.13705 0.170416 -0.684334</pose>
+          <velocity>0.003083 -0.00385 -0.001343 -0.013827 -0.046969 0.012502</velocity>
+          <acceleration>3.3205 -0.470005 -0.766906 -2.45794 0.766958 -2.18887</acceleration>
+          <wrench>16.1159 -2.28114 -3.72213 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_wrist_pitch'>
+          <pose>-1.15569 -0.917037 0.644944 -1.35134 0.069642 -1.73716</pose>
+          <velocity>0.037441 -0.010546 0.001314 0.01244 -0.042057 -0.000554</velocity>
+          <acceleration>-0.974638 -0.488713 1.12728 2.1051 -0.955642 -2.66686</acceleration>
+          <wrench>-0.113616 -0.056971 0.13141 0 -0 0</wrench>
+        </link>
+        <link name='/r2/right_wrist_yaw'>
+          <pose>-1.1542 -0.916693 0.638635 2.51572 1.46149 0.789811</pose>
+          <velocity>0.031339 -0.010794 0.001173 0.004285 -0.09528 -0.004798</velocity>
+          <acceleration>-0.905095 -0.206447 0.752914 -0.72475 1.11273 2.23833</acceleration>
+          <wrench>-1.21229 -0.276518 1.00846 0 -0 0</wrench>
+        </link>
+        <link name='/r2/robot_world'>
+          <pose>-0.879172 -0.915778 0.100797 -0.000797 7e-06 -0.156709</pose>
+          <velocity>-0.003747 0.0006 -0.003138 0.000927 0.006577 0.000126</velocity>
+          <acceleration>2.4187 -0.296792 -5.1768 -2.80566 -0.43506 3.03283</acceleration>
+          <wrench>135.471 -16.6233 -289.952 0 -0 0</wrench>
+        </link>
+        <link name='/r2/waist_center'>
+          <pose>-0.879077 -0.915212 0.820797 -3.14158 0.000797 -1.71805</pose>
+          <velocity>0.005126 -0.000606 -0.003143 0.001032 0.006497 0.011673</velocity>
+          <acceleration>2.85216 -0.310469 -5.18227 -2.78455 -0.190138 -2.69962</acceleration>
+          <wrench>57.4139 -6.24973 -104.319 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>17.7439 -21.197 8.34183 0 0.275643 2.35619</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>

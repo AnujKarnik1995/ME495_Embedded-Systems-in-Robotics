@@ -1,0 +1,194 @@
+#!/usr/bin/env python3
+
+"""
+This node is used to spawn the 'Mark' turtle at the next waypoint and move our primary turtle towards it.
+
+Node:
+/waypoint
+
+Publishers:
+/rosout (rosgraph_msgs/Log)
+/turtle1/cmd_vel (geometry_msgs/Twist)
+/turtle1/turtle_vel (turtle_control/TurtleVel)
+
+Subscribers:
+/mark/pose
+/turtle1/pose 
+
+Services:
+/vel_tranlsate
+
+"""
+import rospy
+import math
+import yaml
+import turtlesim.srv
+from my_turtle.srv import VelTranslate
+from my_turtle.msg import TurtleVel
+from geometry_msgs.msg import Twist, Vector3
+from turtlesim.srv import Kill, SetPen, Spawn, SpawnRequest, TeleportAbsolute
+from turtlesim.msg import Pose
+
+
+
+class waypoints(object):
+    def __init__(self):
+        #importing the waypoints into the program:
+        """
+        with open(r'/home/anuj/catkin_ws/src/turtle_control/my_turtle/config/waypoints.yaml') as file:
+            self.waypoints = yaml.load(file, Loader=yaml.FullLoader)
+        
+        config_path = '/home/anuj/catkin_ws/src/turtle_control/my_turtle/config/waypoints.yaml'
+        waypts = rosparam.load_file(config_path)
+        self.waypoints = waypts
+        
+        """
+        self.waypoints = [[1,1],[2,3],[6,7],[8,4]]
+
+        #SERVICES:
+        self.vel_translate_srv = rospy.Service('vel_translate', VelTranslate, self.vel_translate)
+        self.spawn = rospy.ServiceProxy('spawn',Spawn)
+        self.spawn(0, 0, 0, 'mark')
+        self.pen = rospy.ServiceProxy('mark/set_pen', SetPen)
+        self.teleport = rospy.ServiceProxy('mark/teleport_absolute', TeleportAbsolute)
+        self.kill = rospy.ServiceProxy('mark/Kill', Kill)
+
+
+        #PUBLISHERS:
+        self.pub_turtle = rospy.Publisher('turtle1/turtle_vel', TurtleVel, queue_size =10)
+        self.pub_mark = rospy.Publisher('mark/turtle_vel', TurtleVel, queue_size = 10)
+
+        #SUBSCRIBERS:
+        self.t1_pose = rospy.Subscriber('turtle1/pose',Pose, self.turtle_callback)
+        self.mark_pose = rospy.Subscriber('mark/pose', Pose, self.mark_callback)    
+
+        #MESSAGES:
+        self.vel_msg = TurtleVel()
+
+        #HARDCODED PARAMETERS: TO BE ITERATIVELY RESOLVED.
+        self.dist_thresh = 0.5
+        self.mark_count = 0
+        
+        self.mark_move()  # function called and 4 waypoints created
+        self.mark_count = 0
+        self.turtlemove() # motion controller for actual turtle
+        
+    def X_mark(self,x1,y1):
+        #Logic to create the x mark
+        """
+        Idea was to move the mark turtle at the corners of an imaginery box, with the desired coordinates at the centre.
+        The turtle would then work across the diagonals and create an 'X'
+        """    
+        self.vel_msg.linear = 1
+        self.vel_msg.angular = 0
+        
+        startx1 = x1
+        starty1 = y1 - 1
+        startx2 = x1 - 1
+        starty2 = y1
+        self.pen(255,0,0,1,1)
+        self.teleport(startx1,starty1, 0)
+        self.pen(255,0,0,1,0)
+        #confirm how to publish
+        self.pub_mark.publish(self.vel_msg)
+        self.pen(255,0,0,1,0)
+        self.teleport(startx2,starty2, 1.5708)
+        self.pen(255,0,0,1,0)
+        self.pub_mark.publish(self.vel_msg) #no stop as it is supposed to work only for 1 second
+        self.pen(255,0,0,1,1)
+        
+
+    def mark_move(self):
+        #function to create X marks at all 4 waypoints
+        self.X_mark(self.waypoints[self.mark_count][0],self.waypoints[self.mark_count][1])
+        self.mark_count += 1
+        self.X_mark(self.waypoints[self.mark_count][0],self.waypoints[self.mark_count][1])
+        self.mark_count += 1
+        self.X_mark(self.waypoints[self.mark_count][0],self.waypoints[self.mark_count][1])
+        self.mark_count += 1
+        self.X_mark(self.waypoints[self.mark_count][0],self.waypoints[self.mark_count][1])
+        self.mark_count += 1
+        
+    
+
+    def vel_translate(self, twist):
+        """
+        Function to log the inputs
+        """
+        rospy.logdebug('Velocity inputs: %f %f', twist.twist.linear.x, twist.twist.angular.z)
+
+        if(twist.twist.linear.y != 0.0 or twist.twist.linear.z != 0.0 or twist.twist.angular.x != 0 or twist.twist.angular.y != 0.0):
+            return NONE
+
+        else:
+            return twist.twist.linear.x, twist.twist.angular.z
+    
+    def mark_callback(self, pose):
+        self.mk_x = pose.x
+        self.mk_y = pose.y
+
+    def turtle_callback(self,pose):
+        self.turtle_x = pose.x
+        self.turtle_y = pose.y
+        self.turtle_theta = pose.theta
+
+    
+
+    def turtlemove(self):
+        """
+        CONTROLLLER NOT WORKING
+        """
+
+        #Function to move turtle 1 basesd on mark's position.
+        #standard distance formula
+
+        dist_mk = abs(((self.turtle_x - self.waypoints[self.mark_count][0]))**2 + ((self.turtle_y - self.waypoints[self.mark_count][1]))**2)
+
+        angle_mk = (math.atan2(self.waypoints[self.mark_count][1] - self.turtle_y, self.waypoints[self.mark_count][0] - self.turtle_x))
+        
+        #Proportional control
+        #Start of execution
+        
+
+        self.teleport(self.waypoints[self.mark_count][0],self.waypoints[self.mark_count][1],0)
+        self.rate = rospy.Rate(10)  #10Hz
+
+        #anglular correction:
+        while (self.turtle_theta < 0.995*angle_mk) or (self.turtle_theta> 1.01* angle_mk):
+            a_vel = angle_mk * 0.5
+            l_vel = 0
+            self.vel_msg.linear = l_vel
+            self.vel_msg.angular = a_vel
+            rospy.logdebug(f'Message publish: {self.vel_msg}')
+            self.pub_turtle.publish(self.vel_msg)
+
+
+        if (self.turtle_theta < 0.990*angle_mk) or (self.turtle_theta> 1.005* angle_mk):
+            a_vel = 0
+            l_vel = 0                
+            self.vel_msg.linear = l_vel
+            self.vel_msg.angular = a_vel
+            self.pub_turtle.publish(self.vel_msg)
+        
+                        
+
+def main():
+    rospy.init_node('waypoint')
+    move = waypoints()
+    rospy.spin()
+
+if __name__== '__main__':
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass
+
+
+
+
+
+
+
+
+
+

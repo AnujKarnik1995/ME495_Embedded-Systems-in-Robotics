@@ -1,0 +1,8 @@
+<launch>
+    <remap from = "turtle_vel" to="turtle1/turtle_vel" />
+    <node name="turtlesim" pkg="turtlesim" type="turtlesim_node" />
+    <node name="turtle_interpret" pkg="my_turtle" type="turtle_interpret" />
+    <node name="waypoint" pkg="my_turtle" type="waypoint">
+        <param name="dist_thresh" value="0.3" />
+    </node>
+</launch>

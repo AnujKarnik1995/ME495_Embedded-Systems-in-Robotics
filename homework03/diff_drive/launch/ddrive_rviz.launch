@@ -1,0 +1,22 @@
+<launch>
+
+    <!--<param name="robot_description" textfile="$(find diff_drive)/urdf/ddrive.urdf" /> -->
+    <arg name="model" default="$(find diff_drive)/urdf/ddrive.xacro.urdf"/>
+    <arg name="gui" default="true"/>
+    <arg name="rvizconfig" default="$(find diff_drive)/config/ddrive_odom_config.rviz" />
+    <arg name="joint_state" default="false"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+
+
+    <node unless="$(arg gui)" name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+    <node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+    <group if="$(arg joint_state)">
+        <node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+        <node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    </group>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+</launch>
